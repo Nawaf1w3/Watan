@@ -87,7 +87,8 @@
         <div class=" rounded-xl about-image relative overflow-hidden">
             <!-- Image with inverted curved bottom-left corner -->
             <img class=" rounded-xl" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" class="right" style="max-height:400px;">
-            <div class=" absolute bottom-0 left-0 w-24 h-28 bg-gg rounded-tr-xl text-center">
+            
+            <div class=" absolute bottom-0 left-0 w-24 h-28 bg-gg rounded-tr-3xl text-center">
                 <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-gg hover:bg-gold">
                     <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
