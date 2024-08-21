@@ -14,6 +14,16 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                gold: '#FFD700', // Customize the gold color as needed
+                'gold': '#FFD700', // Optional lighter gold color
+                'black-dark': '#222222', // Custom black color
+                gg: 'rgb(28, 28, 28)'
+            },
+            rotate: {
+                '270': '270deg',
+                // Add other custom rotations here
+              },
         },
     },
 
