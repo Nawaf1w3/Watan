@@ -87,7 +87,7 @@
 
         <div class="bg-gg flex-col justify-between items-start py-4 px-6 bg-black text-gold space-y-4">
             <h1 class="text-3xl font-bold">Over onze</h1>
-            <p class="text-xl text-white">Welkom bij Watan, uw betrouwbare partner voor autoverhuur.</p>
+            <p class="text-xl text-white">Welkom bij Watan,<br> uw betrouwbare partner voor autoverhuur.</p>
             
             <div class=" text-white">
                 <div class="flex items-center space-x-2">
