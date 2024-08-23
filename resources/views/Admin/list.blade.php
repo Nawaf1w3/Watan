@@ -69,7 +69,7 @@
     
     
         <x-app-layout>
-        <section class="relative w-full flex  items-center justify-center  bg-cover bg-center" style="min-height:700px; background-image: url('{{ asset('images/background-nav.jpg') }}');">
+        <section class="relative w-full flex  items-center justify-center  bg-cover bg-center" style="min-height:700px; background-image: url('{{ asset('images/background-admin.jpg') }}');">
             <!-- Dark Overlay -->
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <!-- Banner Content -->
@@ -140,12 +140,12 @@
                         <li class="relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/2">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
-                                <img class="w-full h-64 object-cover" src="https://webredox.net/demo/wp/renax/demo12/wp-content/uploads/sites/12/2024/04/14.jpg" alt="Car Image">
+                                <img class="w-full h-64 object-cover" src="{{ asset('images/background-admin.jpg') }}" alt="Car Image">
                             </div>
                             <!-- Information Section -->
                             <div class="p-4 bg-gg text-white">
                                 <h4 class="text-xl font-bold mb-2">
-                                    <a href="https://webredox.net/demo/wp/renax/demo12/product/bentley-continental/" class="text-white hover:underline">
+                                    <a href="#" class="text-white hover:underline">
                                         Bentley Continental
                                     </a>
                                 </h4>
@@ -175,7 +175,7 @@
                                     <div class="text-lg font-bold">
                                         <span>$500</span> / day
                                     </div>
-                                    <a href="https://webredox.net/demo/wp/renax/demo12/product/bentley-continental/" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200">
+                                    <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200">
                                         Book
                                     </a>
                                 </div>
@@ -186,12 +186,12 @@
                         <li class="relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/2">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
-                                <img class="w-full h-64 object-cover" src="https://webredox.net/demo/wp/renax/demo12/wp-content/uploads/sites/12/2024/04/14.jpg" alt="Car Image">
+                                <img class="w-full h-64 object-cover" src="{{ asset('images/background-nav.jpg') }}" alt="Car Image">
                             </div>
                             <!-- Information Section -->
                             <div class="p-4 bg-gg text-white">
                                 <h4 class="text-xl font-bold mb-2">
-                                    <a href="https://webredox.net/demo/wp/renax/demo12/product/bentley-continental/" class="text-white hover:underline">
+                                    <a href="#" class="text-white hover:underline">
                                         Bentley Continental
                                     </a>
                                 </h4>
@@ -221,7 +221,7 @@
                                     <div class="text-lg font-bold">
                                         <span>$500</span> / day
                                     </div>
-                                    <a href="https://webredox.net/demo/wp/renax/demo12/product/bentley-continental/" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200">
+                                    <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200">
                                         Book
                                     </a>
                                 </div>
