@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('kilometers'); // The current mileage of the car
             $table->enum('fuel_type', ['petrol', 'diesel', 'electric']); // Type of fuel
             $table->enum('transmission_type', ['handmatig', 'automatisch']); // Transmission type
+            $table->json('images')->nullable(); // Column to store image paths as a JSON array
             $table->timestamps(); // Created at and updated at timestamps
         });
     }
