@@ -14,6 +14,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin');
+    Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin');
     Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

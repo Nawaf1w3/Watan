@@ -58,9 +58,18 @@
                     </ul>
                 </div>
             </div>
+            
             <!-- Right Side: Text and Images -->
             <div class="w-full lg:w-2/3 md:w-3/4 flex flex-col justify-center items-center md:items-start">
-                <ul class="flex flex-wrap gap-4 p-4">
+                <div class="mb-6 text-center lg:text-left pt-10 p-10">
+                    <h2 class="text-2xl text-center lg:text-4xl font-bold text-gold mb-2">
+                        Ontdek <span class="text-gray-400">onze nieuwste en meest populaire auto's</span>
+                    </h2>
+                    <p class="text-base text-center lg:text-lg text-gray-200">
+                        Elk voertuig is zorgvuldig geselecteerd om u de beste rijervaring te bieden.
+                    </p>
+                  </div>
+                <ul class="flex flex-wrap gap-4 p-4 lg:pl-16">
                     <li class="relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/3">
                         <!-- Image Section -->
                         <div class="relative overflow-hidden rounded-t-lg">

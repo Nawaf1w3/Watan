@@ -20,7 +20,7 @@ class CarsAdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.create');
     }
 
     /**
