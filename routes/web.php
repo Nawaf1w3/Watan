@@ -13,9 +13,17 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin');
-    Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin');
+
+    //admin routing
+    Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list');
+    Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin.create');
+    Route::post('/admin_store', [CarsAdminController::class, 'store'])->name('admin.store');
+
+
+    //dashboard
     Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
+
+    //account
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
