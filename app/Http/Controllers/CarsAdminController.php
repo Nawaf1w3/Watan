@@ -45,7 +45,7 @@ class CarsAdminController extends Controller
             'daily_rate' => 'required|numeric|min:0',
             'status' => 'required|string|in:beschikbaar,verhuurd,onderhoud',
             'kilometers' => 'required|integer|min:0',
-            'fuel_type' => 'required|string|in:petrol,die-sel,electric',
+            'fuel_type' => 'required|string|in:Benzine,Diesel,Elektrisch',
             'transmission_type' => 'required|string|in:handmatig,automatisch',
             'image_1' => 'nullable',
             'image_2' => 'nullable',
@@ -130,18 +130,91 @@ class CarsAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car)
+    public function edit($id)
     {
-        //
+        // Find the car by its ID
+        $car = Car::findOrFail($id);
+        // dd($car);
+        // Pass the car to the edit view
+        return view('admin.edit', compact('car'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, $id)
     {
-        //
+        // Validate incoming request data
+        $validated = $request->validate([
+            'merk' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer|min:1900|max:' . date('Y'),
+            'color' => 'required|string|max:255',
+            'license_plate' => 'required|string|max:255',
+            'vin' => 'nullable|string|max:255',
+            'daily_rate' => 'required|numeric|min:0',
+            'status' => 'required|string|in:beschikbaar,verhuurd,onderhoud',
+            'kilometers' => 'required|integer|min:0',
+            'fuel_type' => 'required|string|in:Benzine,Diesel,Elektrisch',
+            'transmission_type' => 'required|string|in:handmatig,automatisch',
+            'image_1' => 'nullable',
+            'image_2' => 'nullable',
+            'image_3' => 'nullable',
+            'image_4' => 'nullable',
+            'image_5' => 'nullable',
+            'hp' => 'nullable|integer|min:0',
+            'insurance' => 'nullable|string|max:255',
+        ]);
+        // dd('dd');
+        // Find the car instance by ID
+        $car = Car::findOrFail($id);
+    
+        // Generate directory name based on merk and model
+        $directoryName = strtolower($validated['merk'] . ' ' . $validated['model']);
+        $modelDirectory = 'cars/' . $directoryName;
+    
+        // Create directory if it doesn't exist
+        if (!Storage::exists($modelDirectory)) {
+            Storage::makeDirectory($modelDirectory);
+        }
+    
+        // Handle file uploads and paths
+        $imageFields = ['image_1', 'image_2', 'image_3', 'image_4', 'image_5'];
+        foreach ($imageFields as $imageField) {
+            if ($request->hasFile($imageField)) {
+                // Delete old image if exists
+                if ($car->$imageField) {
+                    Storage::delete('public/' . $car->$imageField);
+                }
+    
+                // Store new image and update path
+                $path = $request->file($imageField)->store($modelDirectory, 'public');
+                $car->$imageField = str_replace('public/', '', $path); // Remove 'public/' prefix
+            }
+        }
+    
+        // Update other car attributes
+        $car->merk = $validated['merk'];
+        $car->model = $validated['model'];
+        $car->year = $validated['year'];
+        $car->color = $validated['color'];
+        $car->license_plate = $validated['license_plate'];
+        $car->vin = $validated['vin'];
+        $car->daily_rate = $validated['daily_rate'];
+        $car->status = $validated['status'];
+        $car->kilometers = $validated['kilometers'];
+        $car->fuel_type = $validated['fuel_type'];
+        $car->transmission_type = $validated['transmission_type'];
+        $car->hp = $validated['hp'];
+        $car->insurance = $validated['insurance'];
+    
+        // Save the updated car record
+        $car->save();
+    
+        // Redirect back with a success message
+        return redirect()->route('admin.list')->with('success', 'Car updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.

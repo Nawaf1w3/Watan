@@ -131,9 +131,9 @@
                 <div class="w-full p-1">
                     <label for="fuel_type" class="block text-gray-200 font-medium mb-1 text-center">Brandstof Type</label>
                     <select id="fuel_type" name="fuel_type"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="petrol">Benzine</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="electric">Elektrisch</option>
+                        <option value="Benzine">Benzine</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Elektrisch">Elektrisch</option>
                     </select>
                     @error('fuel_type')
                         <span class="text-red-500 text-sm">{{ $message }}</span>

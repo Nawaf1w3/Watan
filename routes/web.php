@@ -18,8 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list');
     Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin.create');
     Route::post('/admin_store', [CarsAdminController::class, 'store'])->name('admin.store');
+    Route::get('/admin/edit/{id}', [CarsAdminController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin_update/{id}', [CarsAdminController::class, 'update'])->name('admin.update');
 
-
+    
     //dashboard
     Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
 

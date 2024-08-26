@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('daily_rate', 5, 2); // The rental rate per day in dollars
             $table->enum('status', ['beschikbaar', 'verhuurd', 'onderhoud']);// The status of the car
             $table->integer('kilometers'); // The current mileage of the car
-            $table->enum('fuel_type', ['petrol', 'diesel', 'electric']); // Type of fuel
+            $table->enum('fuel_type', ['Benzine', 'Diesel', 'Elektrisch']); // Type of fuel
             $table->enum('transmission_type', ['handmatig', 'automatisch']); // Transmission type
             $table->string('hp');
             $table->string('insurance');
