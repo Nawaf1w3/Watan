@@ -31,7 +31,6 @@
             <form action="{{ route('admin.update', ['id' => $car->id]) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @csrf
                 @method('PUT') <!-- This is important for the update method -->
-    
                 <!-- Brand -->
                 <div class="flex justify-between">
                     <div class="w-full p-1">
@@ -62,6 +61,18 @@
                         <label for="color" class="block text-gray-200 font-medium mb-1 text-center">Kleur</label>
                         <input type="text" id="color" name="color" value="{{ old('color', $car->color) }}" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('color')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="flex w-full justify-between">
+                    <div class="w-full p-1">
+                        <label for="transmission_type" class="block text-gray-200 font-medium mb-1 text-center">Versnellingsbak Type</label>
+                        <select id="transmission_type" name="transmission_type" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="handmatig" {{ $car->transmission_type == 'handmatig' ? 'selected' : '' }}>Handmatig</option>
+                            <option value="automatisch" {{ $car->transmission_type == 'automatisch' ? 'selected' : '' }}>Automatisch</option>
+                        </select>
+                        @error('transmission_type')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
@@ -130,6 +141,8 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="flex justify-between">
                     <div class="w-full p-1">
                         <label for="fuel_type" class="block text-gray-200 font-medium mb-1 text-center">Brandstof</label>
                         <select id="fuel_type" name="fuel_type" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -142,7 +155,7 @@
                         @enderror
                     </div>
                 </div>
-                
+     
                 <!-- Image Uploads -->
                 <div class="flex justify-between">
                     <!-- Existing Image Preview -->
@@ -166,46 +179,37 @@
                         @enderror
                     </div>
                 </div>
-                <!-- Additional Image Upload -->
-                <div class="w-full p-1">
-                    <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
-                    <img src="{{ asset('storage/' . $car->image_3) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
-                    <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
-                    <input type="file" id="image_3" name="image_3" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('image_3')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="w-full p-1">
-                    <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
-                    <img src="{{ asset('storage/' . $car->image_4) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
-                    <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
-                    <input type="file" id="image_4" name="image_4" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('image_4')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="w-full p-1">
-                    <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
-                    <img src="{{ asset('storage/' . $car->image_5) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
-                    <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
-                    <input type="file" id="image_5" name="image_5" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('image_5')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
                 <div class="flex justify-between">
+                    <!-- Additional Image Upload -->
                     <div class="w-full p-1">
-                        <label for="transmission_type" class="block text-gray-200 font-medium mb-1 text-center">Versnellingsbak Type</label>
-                        <select id="transmission_type" name="transmission_type" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="handmatig" {{ $car->transmission_type == 'handmatig' ? 'selected' : '' }}>Handmatig</option>
-                            <option value="automatisch" {{ $car->transmission_type == 'automatisch' ? 'selected' : '' }}>Automatisch</option>
-                        </select>
-                        @error('transmission_type')
+                        <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
+                        <img src="{{ asset('storage/' . $car->image_3) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
+                        <input type="file" id="image_3" name="image_3" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('image_3')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="w-full p-1">
+                        <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
+                        <img src="{{ asset('storage/' . $car->image_4) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
+                        <input type="file" id="image_4" name="image_4" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('image_4')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="w-full p-1">
+                        <label for="current_image3" class="block text-gray-200 font-medium mb-1 text-center">Huidige Afbeelding 3</label>
+                        <img src="{{ asset('storage/' . $car->image_5) }}" alt="Huidige Afbeelding 3" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <label for="image3" class="block text-gray-200 font-medium mb-1 text-center">Nieuwe Afbeelding 3</label>
+                        <input type="file" id="image_5" name="image_5" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('image_5')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
+ 
                 <!-- Submit Button -->
                 <div class="col-span-2 text-center">
                     <button type="submit" class="bg-yellow-500 text-black py-2 px-6 rounded-lg text-lg font-semibold hover:bg-yellow-600">Bijwerken</button>
