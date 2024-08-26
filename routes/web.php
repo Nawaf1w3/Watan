@@ -20,8 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin_store', [CarsAdminController::class, 'store'])->name('admin.store');
     Route::get('/admin/edit/{id}', [CarsAdminController::class, 'edit'])->name('admin.edit');
     Route::put('/admin_update/{id}', [CarsAdminController::class, 'update'])->name('admin.update');
+    Route::delete('/admin_delete/{id}', [CarsAdminController::class, 'destroy'])->name('admin.delete');
 
-    
+    //taxi
+    Route::get('/taxi', [CarsController::class, 'taxi'])->name('taxi.list');
+
+    //private
+    Route::get('/private', [CarsController::class, 'private'])->name('private.list');
     //dashboard
     Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
 

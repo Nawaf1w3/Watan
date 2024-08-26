@@ -22,6 +22,15 @@ export default {
             },
             rotate: {
                 '270': '270deg',
+            },
+            keyframes: {
+                moveRight: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(4px)' },
+                },
+            },
+            animation: {
+                'move-right': 'moveRight 0.3s ease-in-out forwards',
               },
         },
     },

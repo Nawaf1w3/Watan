@@ -24,6 +24,18 @@ class CarsController extends Controller
     {
         //
     }
+    public function private()
+    {
+        $cars = Car::where('car_type', 'taxi')->get();
+
+        return view('private.list',compact('cars'));
+    }
+    public function taxi()
+    {
+        $cars = Car::where('car_type', 'private')->get();
+
+        return view('taxi.list',compact('cars'));
+    }
 
     /**
      * Store a newly created resource in storage.

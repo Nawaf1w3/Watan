@@ -251,7 +251,12 @@
                             <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
 
                             <!-- For a Delete Button -->
-                            {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
+                            <form action="{{ route('admin.delete', $car->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded">Delete</button>
+                            </form>
+                            
                         </li>
                     @endforeach
                     @foreach ($cars as $car)

@@ -17,7 +17,7 @@
         <div id="navbar-menu" class="hidden w-full md:block md:w-auto">
             <ul class="bg-gg border-gg p-4 md:p-0 mt-4 md:mt-0 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:bg-transparent md:border-transparent font-medium flex flex-col">
                 <li>
-                    <a href="/dashboard" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold" aria-current="page">Home</a>
+                    <a href="{{route('dashboard')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">About</a>
@@ -26,18 +26,33 @@
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">Services</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">Pricing</a>
-                </li>
-                <li>
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">Contact</a>
                 </li>     
                 <li>
-                    <a href="/admin" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">Admin</a>
+                    <a href="{{route('admin.list')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 dark:text-white md:dark:hover:text-gold dark:hover:text-gold">Admin</a>
+                </li>
+                <!-- Dropdown Button -->
+                <li class="relative group">
+                    <button class="flex items-center text-white rounded-lg  focus:outline-none">
+                        Cars
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <ul class="absolute left-0 mt-2 w-48 bg-gg border border-gg rounded-lg shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <li class="">
+                            <a href="{{route('private.list')}}" class="block hover:text-gold px-4 py-2 text-white transition-transform duration-300 hover:animate-move-right">Private</a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('taxi.list')}}" class="block hover:text-gold px-4 py-2 text-white transition-transform duration-300 hover:animate-move-right">Taxi</a>
+                        </li>
+                    </ul>
                 </li>
                 <!-- Dropdown Button as List Item -->
-     
             </ul>
         </div>
+        
          <!-- User Dropdown -->
         <div class="relative">
             <x-dropdown align="right" width="48">

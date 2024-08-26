@@ -141,15 +141,27 @@
                 </div>
             </div>
             <!-- Transmission Type -->
-            <div>
-                <label for="transmission_type" class="block text-gray-200 font-medium mb-1">Versnellingsbak Type</label>
-                <select id="transmission_type" name="transmission_type"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="handmatig">Handmatig</option>
-                    <option value="automatisch">Automatisch</option>
-                </select>
-                @error('transmission_type')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
+            <div class="flex justify-center">
+                <div class="w-full p-1">
+                    <label for="transmission_type" class="block text-gray-200 font-medium mb-1">Versnellingsbak Type</label>
+                    <select id="transmission_type" name="transmission_type"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="handmatig">Handmatig</option>
+                        <option value="automatisch">Automatisch</option>
+                    </select>
+                    @error('transmission_type')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="w-full p-1">
+                    <label for="car_type" class="block text-gray-200 font-medium mb-1">Auto Type</label>
+                    <select id="car_type" name="car_type"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="taxi">Taxi</option>
+                        <option value="private">Private</option>
+                    </select>
+                    @error('car_type')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
          
             <!-- Images -->

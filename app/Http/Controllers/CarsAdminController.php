@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CarsAdminController extends Controller
 {
@@ -36,6 +37,7 @@ class CarsAdminController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
+            'car_type'  =>'required|string|in:taxi,private',
             'merk' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
@@ -57,7 +59,7 @@ class CarsAdminController extends Controller
         ]);
     
             // Generate directory name based on merk and model
-            $directoryName = strtolower($validated['merk'] . ' -' . $validated['model']);
+            $directoryName = strtolower($validated['merk'] . '-' . $validated['model']);
             $modelDirectory = 'cars/' . $directoryName; // Note: Removed 'public/' from the directory path
 
             // Create directory if it doesn't exist
@@ -95,6 +97,7 @@ class CarsAdminController extends Controller
     
         // Create a new Car instance and assign all attributes including image paths
         $car = new Car();
+        $car->car_type = $validated['car_type'];
         $car->merk = $validated['merk'];
         $car->model = $validated['model'];
         $car->year = $validated['year'];
@@ -146,6 +149,7 @@ class CarsAdminController extends Controller
     {
         // Validate incoming request data
         $validated = $request->validate([
+            'car_type'  =>'required|string|in:taxi,private',
             'merk' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
@@ -170,7 +174,7 @@ class CarsAdminController extends Controller
         $car = Car::findOrFail($id);
     
         // Generate directory name based on merk and model
-        $directoryName = strtolower($validated['merk'] . ' ' . $validated['model']);
+        $directoryName = strtolower($validated['merk'] . '-' . $validated['model']);
         $modelDirectory = 'cars/' . $directoryName;
     
         // Create directory if it doesn't exist
@@ -194,6 +198,7 @@ class CarsAdminController extends Controller
         }
     
         // Update other car attributes
+        $car->car_type = $validated['car_type'];
         $car->merk = $validated['merk'];
         $car->model = $validated['model'];
         $car->year = $validated['year'];
@@ -219,8 +224,19 @@ class CarsAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Car $car)
+    public function destroy($id)
     {
-        //
+        $car = Car::findOrFail($id);
+    
+        // Construct the directory path
+        $directory = 'cars/' . $car->merk . '-' . $car->model;
+        
+        // Delete the entire directory with all its contents
+        Storage::disk('public')->deleteDirectory($directory);
+    
+        // Delete the car record from the database
+        $car->delete();
+    
+        return redirect()->route('admin.list')->with('success', 'Car and associated images deleted successfully');
     }
 }

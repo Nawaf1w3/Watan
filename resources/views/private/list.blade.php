@@ -27,7 +27,6 @@
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome bij Watan auto huur bedrijf</h1>
                 <p class="text-lg md:text-xl mb-8">Huur premium auto's, Voor betaalbare prijzen.</p>
                 <a href="#" class="bg-yellow-500 text-black py-2 px-6 rounded-lg text-lg font-semibold hover:bg-yellow-600">Meer weten</a>
-                <x-button type="edit" label="Auto toevoegen" action="{{ route('admin.create') }}"/>
             </div>
         </div>
     </section>
@@ -247,11 +246,6 @@
                                     </a>
                                 </div>                                
                             </div>
-                            <!-- For an Edit Button -->
-                            <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
-
-                            <!-- For a Delete Button -->
-                            {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
                         </li>
                     @endforeach
                     @foreach ($cars as $car)
@@ -401,11 +395,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <!-- For an Edit Button -->
-                            <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
-
-                            <!-- For a Delete Button -->
-                            {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
                         </li>
                     @endforeach
                 </ul>
