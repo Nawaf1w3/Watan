@@ -1,5 +1,19 @@
     
 <x-app-layout>
+
+    <style>
+        @media (min-width: 1024px) {
+            .li_carlis {
+                width: 48%;
+            }
+            .carlist_div{
+                width:75%;
+            }
+        }
+        .margin-top-postioning{
+            top: -5.6rem;
+        }
+    </style>
     <section class="relative w-full flex  items-center justify-center  bg-cover bg-center" style="min-height:700px; background-image: url('{{ asset('images/background-admin.jpg') }}');">
         <!-- Dark Overlay -->
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -13,19 +27,19 @@
             </div>
         </div>
     </section>
-    <section class="relative flex flex-wrap items-center justify-center w-full bg-black min-h-[700px] overflow-hidden">
-        <div class="w-full md:flex justify-end px-4">
+    <section class="relative flex flex-wrap items-center justify-center w-full bg-black min-h-[700px]">
+        <div class="carlist_div w-full md:flex justify-end px-4">
             <!-- Left Side: Search and Categories -->
-            <div class="bg-gg rounded-lg shadow-lg md:w-1/3 lg:w-1/5 p-6 mb-6 md:mb-0">
+            <div class="bg-gg rounded-lg shadow-lg md:w-1/3 lg:w-1/5 p-6 mb-6 md:mb-0 relative">
                 <!-- Search Widget -->
-                <div class="rounded-t-lg mb-6 p-6 bg-gold">
+                <div class="absolute margin-top-postioning left-0 w-full rounded-t-lg bg-gold p-6">
                     <form role="search" method="get" class="flex items-center" action="#">
-                        <input type="text" class="w-full p-2 border border-gray-300 rounded-l-lg focus:outline-none" placeholder="Search products…" name="s">
+                        <input type="text" class="w-full  p-2 border bg-gg border-gg rounded-lg focus:outline-none" placeholder="Search products…" name="s">
                         <input type="hidden" name="post_type" value="product">
                     </form>
                 </div>
                 <!-- Categories Widget -->
-                <div class="mb-6">
+                <div class=" mb-6">
                     <h6 class="text-lg font-semibold mb-4 text-white">Categories</h6>
                     <ul class="space-y-2">
                         <li class="flex items-center">
@@ -61,7 +75,7 @@
             </div>
             
             <!-- Right Side: Text and Images -->
-            <div class="w-full lg:w-2/3 md:w-3/4 flex flex-col justify-center items-center md:items-start">
+            <div class="w-full lg:2/3 md:w-3/4 flex flex-col justify-center items-center md:items-start">
                 <div class="mb-6 text-center lg:text-left pt-10 p-10">
                     <h2 class="text-2xl text-center lg:text-4xl font-bold text-gold mb-2">
                         Ontdek <span class="text-gray-400">onze nieuwste en meest populaire auto's</span>
@@ -69,10 +83,10 @@
                     <p class="text-base text-center lg:text-lg text-gray-200">
                         Elk voertuig is zorgvuldig geselecteerd om u de beste rijervaring te bieden.
                     </p>
-                  </div>
+                </div>
                 <ul class="flex flex-wrap gap-4 p-4 lg:pl-16">
                     @foreach ($cars as $car)
-                        <li class="relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/3">
+                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
                                 <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
@@ -223,11 +237,10 @@
 
                             <!-- For a Delete Button -->
                             {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
-
                         </li>
                     @endforeach
                     @foreach ($cars as $car)
-                        <li class="relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/3">
+                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
                                 <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
@@ -378,7 +391,6 @@
 
                             <!-- For a Delete Button -->
                             {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
-
                         </li>
                     @endforeach
                 </ul>

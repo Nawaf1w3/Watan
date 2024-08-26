@@ -57,7 +57,7 @@
         }
 
         .about-image:hover .circle-overlay {
-            background-color: #FFCC00; /* Change background color */
+            background-color: #f5b754; /* Change background color */
         }
 
         .about-image:hover .circle-overlay svg path {

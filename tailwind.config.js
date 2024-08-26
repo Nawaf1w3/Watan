@@ -16,8 +16,8 @@ export default {
             },
             colors: {
                 gold: '#FFD700', // Customize the gold color as needed
-                'gold': '#FFD700', // Optional lighter gold color
-                'black': 'rgb(28, 28, 28)', // Custom black color
+                'gold': '#f5b754', // Optional lighter gold color
+                'black': '#1b1b1b', // Custom black color
                 gg: '#222'
             },
             rotate: {
