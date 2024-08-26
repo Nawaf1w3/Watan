@@ -13,6 +13,10 @@
         .margin-top-postioning{
             top: -5.6rem;
         }
+        .a_day{
+            padding-top:2px; 
+            font-size: 18px;
+        }
     </style>
     <section class="relative w-full flex  items-center justify-center  bg-cover bg-center" style="min-height:700px; background-image: url('{{ asset('images/background-admin.jpg') }}');">
         <!-- Dark Overlay -->
@@ -30,12 +34,22 @@
     <section class="relative flex flex-wrap items-center justify-center w-full bg-black min-h-[700px]">
         <div class="carlist_div w-full md:flex justify-end px-4">
             <!-- Left Side: Search and Categories -->
-            <div class="bg-gg rounded-lg shadow-lg md:w-1/3 lg:w-1/5 p-6 mb-6 md:mb-0 relative">
+            <div class="bg-gg rounded-lg shadow-lg md:w-1/3 lg:w-1/4 p-6 mb-6 md:mb-0 relative">
                 <!-- Search Widget -->
-                <div class="absolute margin-top-postioning left-0 w-full rounded-t-lg bg-gold p-6">
+                <div class="absolute flex justify-center margin-top-postioning left-0 w-full rounded-t-lg bg-gold p-6">
                     <form role="search" method="get" class="flex items-center" action="#">
-                        <input type="text" class="w-full  p-2 border bg-gg border-gg rounded-lg focus:outline-none" placeholder="Search products…" name="s">
-                        <input type="hidden" name="post_type" value="product">
+                        <div class="relative flex items-center group">
+                            <input type="text" class="text-gray-300 w-full p-2 border bg-gg border-gg rounded-lg focus:outline-none pr-16 " placeholder="Search products…" name="s">
+                            <input type="hidden" name="post_type" value="product">
+                            <button type="submit" class="absolute right-2 bg-gold p-2 rounded-full transform transition-transform duration-300">
+                                <svg class="transform transition-transform duration-300 group-hover:rotate-90 group-focus-within:rotate-90" width="16" height="16" version="1.1" id="fi_149852" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56.966 56.966" xml:space="preserve">
+                                    <path fill="gg" d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+                                        s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                                        c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+                                        s-17-7.626-17-17S14.61,6,23.984,6z" fill="#fff"/>
+                                </svg>
+                            </button>
+                        </div>                     
                     </form>
                 </div>
                 <!-- Categories Widget -->
@@ -223,14 +237,15 @@
                                         <p class="ml-2 text-white">{{$car->year}}</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center mt-4">
-                                    <div class="text-lg">
-                                        <span class="text-gold font-bold">${{$car->daily_rate}}</span> / day
+                                <div class="flex justify-between items- mt-4 text-lg">
+                                    <div class="relative flex">
+                                        <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                     </div>
+                                    
                                     <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
                                         meer weten
                                     </a>
-                                </div>
+                                </div>                                
                             </div>
                             <!-- For an Edit Button -->
                             <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
