@@ -79,9 +79,10 @@
                     <div class="w-full p-1">
                         <label for="car_type" class="block text-gray-200 font-medium mb-1 text-center">Auto type</label>
                         <select id="car_type" name="car_type" class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="taxi" {{ $car->car_type == 'taxi' ? 'selected' : '' }}>Taxi</option>
-                            <option value="private" {{ $car->car_type == 'private' ? 'selected' : '' }}>Private</option>
+                            <option value="taxi" {{ old('car_type', $car->car_type) == 'taxi' ? 'selected' : '' }}>Taxi</option>
+                            <option value="private" {{ old('car_type', $car->car_type) == 'private' ? 'selected' : '' }}>Private</option>
                         </select>
+                        
                         @error('car_type')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

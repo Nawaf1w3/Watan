@@ -18,6 +18,7 @@ export default {
                 gold: '#FFD700', // Customize the gold color as needed
                 'gold': '#f5b754', // Optional lighter gold color
                 'black': '#1b1b1b', // Custom black color
+                'light_black': '#1b1b1b',
                 gg: '#222'
             },
             rotate: {
@@ -31,6 +32,15 @@ export default {
             },
             animation: {
                 'move-right': 'moveRight 0.3s ease-in-out forwards',
+              },
+              screens: {
+                'sm-700': { 'max': '700px' }, // Custom breakpoint for 700px and smaller
+              },
+              fontSize: {
+                'sm-0.7rem': '0.7rem', // Custom font-size
+              },
+              lineHeight: {
+                'sm-1.0rem': '1.0rem', // Custom line-height
               },
         },
     },

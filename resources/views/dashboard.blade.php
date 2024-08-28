@@ -17,15 +17,27 @@
         .clip-path-inverted-curve-left {
             /* clip-path: polygon(0 100%, 100% 100%, 100% 0, 0% 75%, 25% 100%); */
         }
-
-        .top-left-icon{
-            left: -1px;
-            top: -44px;
+        @media (min-width: 768px) {
+            .top-left-icon{
+                left: -1px;
+                top: -44px;
             
+            }
+            .bottom-right-icon{
+                right: -44px;
+                bottom: -1px;
+            }
         }
-        .bottom-right-icon{
-            right: -44px;
-            bottom: -1px;
+        @media (max-width: 768px) {
+            .top-left-icon{
+                left: -1px;
+                top: -44px;
+                
+            }
+            .bottom-right-icon{
+                right: -44px;
+                bottom: -1px;
+            }
         }
         .arrow {
             transform: rotate(260deg); /* Rotate arrow to point top-right */
@@ -63,6 +75,31 @@
         .about-image:hover .circle-overlay svg path {
             stroke: #292929; /* Change path color */
         }
+
+        .curved-image{
+            max-height:400px;
+            max-width: 400px;
+        }
+        @media(max-width: 500px){
+            .curved-image{
+                max-height:100%;
+                max-width: 100%;
+                min-height:100%;
+                min-width: 100%;
+        }
+        .image-div{
+            max-height:350px;
+            max-width: 350px;
+           min-height:350px;
+           min-width: 350px;
+        }
+        .image-div-about{
+            max-height:250px;
+            max-width: 250;
+           min-height:250;
+           min-width: 250;
+        }
+        }
   
     </style>
 
@@ -86,52 +123,58 @@
     <section class="relative w-full flex  items-center justify-center bg-gg" style="min-height:700px;');">
 
         <div class="bg-gg flex-col justify-between items-start py-4 px-6 bg-black text-gold space-y-4">
-            <h1 class="text-3xl font-bold">Over onze</h1>
-            <p class="text-xl text-white">Welkom bij Watan,<br> uw betrouwbare partner voor autoverhuur.</p>
-            
-            <div class=" text-white">
-                <div class="flex items-center space-x-2">
-                    <span>Privéauto's</span>
-                    <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <h1 class="text-3xl sm-700:text-2xl font-bold">Over onze</h1>
+            <p class="text-xl sm-700:text-base text-white">Welkom bij Watan,<br> uw betrouwbare partner voor autoverhuur.</p>
+        
+            <div class="text-white">
+                <div class="flex items-center space-x-2 sm-700:space-x-1">
+                    <span class="sm-700:text-sm-0.7rem sm-700:leading-sm-1.0rem">Privéauto's</span>
+                    <svg class="w-6 h-6 sm-700:w-5 sm-700:h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <span>Taxiauto's</span>
-                    <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div class="flex items-center space-x-2 sm-700:space-x-1">
+                    <span class="sm-700:text-sm-0.7rem sm-700:leading-sm-1.0rem">Taxiauto's</span>
+                    <svg class="w-6 h-6 sm-700:w-5 sm-700:h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
             </div>
         
-            <button class="bg-gold text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-600">
+            <button class="bg-gold text-gg font-semibold py-2 px-4 sm-700:py-1 sm-700:px-2 rounded-md hover:bg-yellow-600">
                 Ontdek meer
             </button>
         </div>
         
         
-        <div class="right rounded-tl-lg rounded-tr-lg rounded-br-lg  about-image relative overflow-hidden">
-            <!-- Image with inverted curved bottom-left corner -->
-            <img class="rounded-tl-lg rounded-tr-lg rounded-br-lg" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" style="max-height:400px;">
-            
-            <div class="absolute bottom-0 left-0 w-24 h-28 bg-gg rounded-tr-3xl text-center">
-                <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-gg hover:bg-gold">
-                    <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-                            <path file="red" d="m8.5 1.5v7h-7"/>
-                            <path d="m.5.5 8 8"/>
-                        </g>
-                    </svg>
+        
+        
+        
+        <div class="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-evenly bg-gg">
+            <div class="md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                <div class=" image-div-about md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                    <!-- Image with inverted curved bottom-left corner -->
+                    <img class="rounded-tl-lg curved-image rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" >
                 </div>
-                <div class="absolute top-left-icon text-gg w-11 h-11 rotate-270">
-                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(28, 28, 28)"></path>
-                    </svg>
-                </div>
-                <div class="absolute bottom-right-icon text-gg w-11 h-11 rotate-270">
-                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(28, 28, 28)"></path>
-                    </svg>
+                <div class="absolute bottom-0 left-0 w-24 h-28 bg-gg rounded-tr-3xl text-center">
+                    <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-gg hover:bg-gold">
+                        <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+                                <path file="red" d="m8.5 1.5v7h-7"/>
+                                <path d="m.5.5 8 8"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
+                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#222"></path>
+                        </svg>
+                    </div>
+                    <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
+                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#222"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,82 +190,66 @@
             </p>
         </div>
         
-        <div class="w-full flex  items-center justify-evenly bg-black">
-            <div class="right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
-                <!-- Image with inverted curved bottom-left corner -->
-                <img class="rounded-tl-lg rounded-tr-lg rounded-br-lg" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" style="max-height:400px;">
-                
-                <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
-                    <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
-                        <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-                                <path file="red" d="m8.5 1.5v7h-7"/>
-                                <path d="m.5.5 8 8"/>
-                            </g>
-                        </svg>
+        <div class="w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-evenly bg-black">
+            <a href="{{route('taxi.list')}}">
+                <div class="md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                    <div class=" image-div md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                        <!-- Image with inverted curved bottom-left corner -->
+                        <img class=" curved-image rounded-tl-lg rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" >
                     </div>
-                    <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
-                    </div>
-                    <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
-                <!-- Image with inverted curved bottom-left corner -->
-                <img class="rounded-tl-lg rounded-tr-lg rounded-br-lg" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" style="max-height:400px;">
-                
-                <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
-                    <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
-                        <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-                                <path file="red" d="m8.5 1.5v7h-7"/>
-                                <path d="m.5.5 8 8"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
-                    </div>
-                    <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
+                    <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
+                        <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
+                            <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+                                    <path file="red" d="m8.5 1.5v7h-7"/>
+                                    <path d="m.5.5 8 8"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
+                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
+                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
-                <!-- Image with inverted curved bottom-left corner -->
-                <img class="rounded-tl-lg rounded-tr-lg rounded-br-lg" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" style="max-height:400px;">
-                
-                <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
-                    <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
-                        <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-                                <path file="red" d="m8.5 1.5v7h-7"/>
-                                <path d="m.5.5 8 8"/>
-                            </g>
-                        </svg>
+            </a>
+            
+            <!-- Repeat for the other two items with the same structure -->
+            <a href="{{route('private.list')}}">
+
+                <div class="md:w-auto p-6 md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                    <div class=" image-div md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+                        <!-- Image with inverted curved bottom-left corner -->
+                        <img class="curved-image rounded-tl-lg rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" >
                     </div>
-                    <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
-                    </div>
-                    <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
-                        <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="rgb(0, 0, 0)"></path>
-                        </svg>
+                    <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
+                        <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
+                            <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+                                    <path file="red" d="m8.5 1.5v7h-7"/>
+                                    <path d="m.5.5 8 8"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="absolute top-left-icon text-black w-11 h-11 rotate-270">
+                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-right-icon text-black w-11 h-11 rotate-270">
+                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 </x-app-layout>

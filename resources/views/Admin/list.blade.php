@@ -100,11 +100,18 @@
                 </div>
                 <ul class="flex flex-wrap gap-4 p-4 lg:pl-16">
                     @foreach ($cars as $car)
-                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
-                            <!-- Image Section -->
-                            <div class="relative overflow-hidden rounded-t-lg">
-                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
-                            </div>
+                    <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2">
+                        <!-- Image Section -->
+                        <div class="relative overflow-hidden rounded-t-lg">
+                            <!-- Image with hover effect -->
+                            <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                        
+                            <!-- Gradient Overlay -->
+                            <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none"></div>
+                        </div>
+                        
+                        
+                        
                             <!-- Information Section -->
                             <div class="p-10 bg-gg text-white">
                                 <h4 class="text-xl font-bold mb-2">
@@ -247,16 +254,20 @@
                                     </a>
                                 </div>                                
                             </div>
-                            <!-- For an Edit Button -->
-                            <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
-
-                            <!-- For a Delete Button -->
-                            <form action="{{ route('admin.delete', $car->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this car?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded">Delete</button>
-                            </form>
-                            
+                            <div class="flex justify-between w-full items-center">
+                                <!-- For an Edit Button -->
+                                <div class="p-2">
+                                    <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
+                                </div>
+                                <!-- For a Delete Button -->
+                                <div class="p-4">
+                                    <form action="{{ route('admin.delete', $car->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 text-white py-1 px-4 hover:bg-red-700 rounded">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                     @foreach ($cars as $car)
