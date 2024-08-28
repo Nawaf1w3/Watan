@@ -102,7 +102,11 @@
                         <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
-                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                                <!-- Image with hover effect -->
+                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                            
+                                <!-- Gradient Overlay -->
+                                <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-gg z-10 pointer-events-none"></div>
                             </div>
                             <!-- Information Section -->
                             <div class="p-10 bg-gg text-white">
@@ -252,7 +256,11 @@
                     <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
                         <!-- Image Section -->
                         <div class="relative overflow-hidden rounded-t-lg">
-                            <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                            <!-- Image with hover effect -->
+                            <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                        
+                            <!-- Gradient Overlay -->
+                            <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-gg z-10 pointer-events-none"></div>
                         </div>
                         <!-- Information Section -->
                         <div class="p-10 bg-gg text-white">
