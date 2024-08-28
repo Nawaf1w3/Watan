@@ -100,6 +100,9 @@
            min-width: 250;
         }
         }
+        .opacity-custom{
+            opacity: 1;
+        }
   
     </style>
 
@@ -191,18 +194,32 @@
         </div>
         
         <div class="w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-evenly bg-black">
-            <a href="{{route('taxi.list')}}">
-                <div class="md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
-                    <div class=" image-div md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
+            <a href="{{route('private.list')}}">
+                <div class="md:w-auto md:p-0 right rounded-tl-lg rounded-tr-lg  about-image relative overflow-hidden">
+                    <div class="image-div md:w-auto md:p-0 right rounded-tl-lg about-image relative overflow-hidden">
                         <!-- Image with inverted curved bottom-left corner -->
-                        <img class=" curved-image rounded-tl-lg rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" >
+                        <img class="curved-image rounded-tl-lg rounded-tr-lg w-full md:max-w-none" src="{{ asset('images/private-car.jpg') }}" alt="Curved Image">
+                        <!-- Shadow Gradient with Text -->
+                        <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none">
+                            <div class="relative text-right h-full w-full bg-gradient-to-b from-transparent via-transparent to-black flex items-end justify-end p-4 opacity-custom">
+                                <div class="text-right">
+                                    <h1 class="text-gold text-xl font-bold">Privéauto</h1>
+                                    <p class="text-white font-bold"> de perfecte Privéauto auto voor uw reis.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+            
+             
+            
+                    <!-- SVGs and Icons -->
                     <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
                         <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
                             <svg class="arrow w-10 h-10 absolute" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-                                    <path file="red" d="m8.5 1.5v7h-7"/>
-                                    <path d="m.5.5 8 8"/>
+                                    <path d="m8.5 1.5v7h-7" />
+                                    <path d="m.5.5 8 8" />
                                 </g>
                             </svg>
                         </div>
@@ -220,13 +237,22 @@
                 </div>
             </a>
             
+            
             <!-- Repeat for the other two items with the same structure -->
-            <a href="{{route('private.list')}}">
+            <a href="{{route('taxi.list')}}">
 
                 <div class="md:w-auto p-6 md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
                     <div class=" image-div md:w-auto  md:p-0 right rounded-tl-lg rounded-tr-lg rounded-br-lg about-image relative overflow-hidden">
                         <!-- Image with inverted curved bottom-left corner -->
-                        <img class="curved-image rounded-tl-lg rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/about.jpg" alt="Curved Image" >
+                        <img class="curved-image rounded-tl-lg rounded-tr-lg rounded-br-lg w-full md:max-w-none" src="{{asset('images/taxi-car.jpg')}}" alt="Curved Image" >
+                        <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none">
+                            <div class="relative text-right h-full w-full bg-gradient-to-b from-transparent via-transparent to-black flex items-end justify-end p-4 opacity-custom">
+                                <div class="text-right">
+                                    <h1 class="text-gold text-xl font-bold">Taxi</h1>
+                                    <p class="text-white font-bold"> de perfecte Taxi auto voor uw werk.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="absolute bottom-0 left-0 w-24 h-28 bg-black rounded-tr-3xl text-center">
                         <div class="circle-overlay relative arrow-icon w-16 h-16 flex items-center justify-center border border-gold rounded-full bg-black hover:bg-gold">
