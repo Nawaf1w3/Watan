@@ -1,4 +1,4 @@
-<nav class="bg-black  ">
+<nav class="bg-black-dark sticky top-0 z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/dashboard" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/logo.jpg') }}" class="h-16" alt="Watan Logo" />
