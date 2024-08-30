@@ -14,12 +14,12 @@ Route::get('/', function () {
 Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
 
     //admin routing
-    Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list');
-    Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin.create');
-    Route::post('/admin_store', [CarsAdminController::class, 'store'])->name('admin.store');
-    Route::get('/admin/edit/{id}', [CarsAdminController::class, 'edit'])->name('admin.edit');
-    Route::put('/admin_update/{id}', [CarsAdminController::class, 'update'])->name('admin.update');
-    Route::delete('/admin_delete/{id}', [CarsAdminController::class, 'destroy'])->name('admin.delete');
+    Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list')->middleware('admin');
+    Route::get('/admin_create', [CarsAdminController::class, 'create'])->name('admin.create')->middleware('admin');
+    Route::post('/admin_store', [CarsAdminController::class, 'store'])->name('admin.store')->middleware('admin');
+    Route::get('/admin/edit/{id}', [CarsAdminController::class, 'edit'])->name('admin.edit')->middleware('admin');
+    Route::put('/admin_update/{id}', [CarsAdminController::class, 'update'])->name('admin.update')->middleware('admin');
+    Route::delete('/admin_delete/{id}', [CarsAdminController::class, 'destroy'])->name('admin.delete')->middleware('admin');
 
     //taxi
     Route::get('/taxi', [CarsController::class, 'taxi'])->name('taxi.list');
@@ -27,7 +27,7 @@ Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
     //private
     Route::get('/private', [CarsController::class, 'private'])->name('private.list');
     Route::get('/private/{id}', [CarsController::class, 'showPrivate'])->name('private.show');
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
 
 
 

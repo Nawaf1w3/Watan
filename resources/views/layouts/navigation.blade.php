@@ -28,9 +28,9 @@
                 <li>
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Contact</a>
                 </li>     
-                <li>
+                {{-- <li>
                     <a href="{{route('admin.list')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Admin</a>
-                </li>
+                </li> --}}
                 <!-- Dropdown Button -->
                 <li class="relative group">
                     <button class="flex items-center text-white rounded-lg  focus:outline-none pl-2">
