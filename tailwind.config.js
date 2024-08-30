@@ -19,7 +19,8 @@ export default {
                 'gold': '#f5b754', // Optional lighter gold color
                 'black': '#1b1b1b', // Custom black color
                 'light_black': '#1b1b1b',
-                gg: '#222'
+                gg: '#222',
+                'black-dark': '#000000',
             },
             rotate: {
                 '270': '270deg',
