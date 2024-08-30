@@ -6,13 +6,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 
 
-
-Route::middleware('auth')->group(function () {
+Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
 
     //admin routing
     Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list');
@@ -27,8 +26,16 @@ Route::middleware('auth')->group(function () {
 
     //private
     Route::get('/private', [CarsController::class, 'private'])->name('private.list');
+    Route::get('/private/{id}', [CarsController::class, 'showPrivate'])->name('private.show');
+Route::middleware('auth')->group(function () {
+
+
+
+
+
+
     //dashboard
-    Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
+
 
     //account
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

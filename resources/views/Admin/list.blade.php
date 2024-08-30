@@ -87,7 +87,6 @@
                     </ul>
                 </div>
             </div>
-            
             <!-- Right Side: Text and Images -->
             <div class="w-full lg:2/3 md:w-3/4 flex flex-col justify-center items-center md:items-start">
                 <div class="mb-6 text-center lg:text-left pt-10 p-10">
@@ -100,18 +99,15 @@
                 </div>
                 <ul class="flex flex-wrap gap-4 p-4 lg:pl-16">
                     @foreach ($cars as $car)
-                    <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2">
-                        <!-- Image Section -->
-                        <div class="relative overflow-hidden rounded-t-lg">
-                            <!-- Image with hover effect -->
-                            <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
-                        
-                            <!-- Gradient Overlay -->
-                            <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-gg z-10 pointer-events-none"></div>
-                        </div>
-                        
-                        
-                        
+                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2">
+                            <!-- Image Section -->
+                            <div class="relative overflow-hidden rounded-t-lg">
+                                <!-- Image with hover effect -->
+                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                            
+                                <!-- Gradient Overlay -->
+                                <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-gg z-10 pointer-events-none"></div>
+                            </div>    
                             <!-- Information Section -->
                             <div class="p-10 bg-gg text-white">
                                 <h4 class="text-xl font-bold mb-2">
@@ -271,10 +267,14 @@
                         </li>
                     @endforeach
                     @foreach ($cars as $car)
-                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
+                        <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
-                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110"src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                                <!-- Image with hover effect -->
+                                <img class="w-full h-64 object-cover transition-transform duration-500 ease-in-out transform hover:scale-110 z-20" src="{{ asset('storage/' . $car->image_1) }}" alt="Car Image">
+                            
+                                <!-- Gradient Overlay -->
+                                <div class="absolute  bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-gg z-10 pointer-events-none"></div>
                             </div>
                             <!-- Information Section -->
                             <div class="p-10 bg-gg text-white">
@@ -408,20 +408,30 @@
                                         <p class="ml-2 text-white">{{$car->year}}</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center mt-4">
-                                    <div class="text-lg">
-                                        <span class="text-gold font-bold">${{$car->daily_rate}}</span> / day
+                                <div class="flex justify-between items- mt-4 text-lg">
+                                    <div class="relative flex">
+                                        <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                     </div>
+                                    
                                     <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
                                         meer weten
                                     </a>
+                                </div>                                
+                            </div>
+                            <div class="flex justify-between w-full items-center">
+                                <!-- For an Edit Button -->
+                                <div class="p-2">
+                                    <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
+                                </div>
+                                <!-- For a Delete Button -->
+                                <div class="p-4">
+                                    <form action="{{ route('admin.delete', $car->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 text-white py-1 px-4 hover:bg-red-700 rounded">Delete</button>
+                                    </form>
                                 </div>
                             </div>
-                            <!-- For an Edit Button -->
-                            <x-button type="edit" label="Edit" action="{{ route('admin.edit', ['id' => $car->id]) }}" />
-
-                            <!-- For a Delete Button -->
-                            {{-- <x-button type="delete" label="Delete" action="{{ route('admin.delete', $car->id) }}" /> --}}
                         </li>
                     @endforeach
                 </ul>
