@@ -80,26 +80,6 @@
             max-height:400px;
             max-width: 400px;
         }
-        @media(max-width: 500px){
-            .curved-image{
-                max-height:100%;
-                max-width: 100%;
-                min-height:100%;
-                min-width: 100%;
-        }
-        .image-div{
-            max-height:350px;
-            max-width: 350px;
-           min-height:350px;
-           min-width: 350px;
-        }
-        .image-div-about{
-            max-height:250px;
-            max-width: 250;
-           min-height:250;
-           min-width: 250;
-        }
-        }
         .opacity-custom{
             opacity: 1;
         }
