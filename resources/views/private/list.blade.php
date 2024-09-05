@@ -255,7 +255,7 @@
                         </li>
                     @endforeach
                     @foreach ($cars as $car)
-                    {{-- <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
+                    <li class="li_carlis relative bg-gg text-white rounded-lg overflow-hidden w-full md:w-1/2 ">
                         <a href="{{ route('private.show', ['id' => $car->id]) }}">
                             <!-- Image Section -->
                             <div class="relative overflow-hidden rounded-t-lg">
@@ -408,7 +408,7 @@
                                 </div>                                
                             </div>
                         </a>
-                    </li> --}}
+                    </li>
                     @endforeach
                 </ul>
             </div>
