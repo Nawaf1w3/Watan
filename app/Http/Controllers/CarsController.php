@@ -54,6 +54,12 @@ class CarsController extends Controller
         // dd($car);
         return view('private.show',compact('car'));
     }
+    public function showTaxi($id)
+    {
+        $car  = Car::where('id', $id)->first();
+        // dd($car);
+        return view('private.show',compact('car'));
+    }
 
     /**
      * Show the form for editing the specified resource.

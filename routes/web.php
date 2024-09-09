@@ -23,6 +23,8 @@ Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
 
     //taxi
     Route::get('/taxi', [CarsController::class, 'taxi'])->name('taxi.list');
+    Route::get('/taxi/{id}', [CarsController::class, 'showTaxi'])->name('private.show');
+
 
     //private
     Route::get('/private', [CarsController::class, 'private'])->name('private.list');
