@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\CarsAdminController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
 });
-
 
 
 Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
@@ -32,11 +32,10 @@ Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
     Route::middleware('auth')->group(function () {
 
 
+    //services
+    Route::get('/services', [ServiceController::class, 'index'])->name('services');
 
 
-
-
-    //dashboard
 
 
     //account
