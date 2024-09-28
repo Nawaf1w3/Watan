@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->enum('car_type', ['taxi', 'private'])->after('id'); // Adjust `existing_column` if necessary
+            $table->enum('doors', ['2', '4'])->after('id');
+            $table->enum('passengers', ['2', '5','7'])->after('doors');
+
         });
     }
 
@@ -22,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->dropColumn('car_type');
+            //
         });
     }
 };

@@ -125,7 +125,7 @@
                                                 </svg>
                                                 <span class="pl-3">Doors:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->doors}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->doors}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400  justify-between">
                                             <div class="flex items-center">
@@ -154,7 +154,7 @@
                                                     </svg>
                                                 <span class="pl-3">Passengers:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->passengers}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->passengers}}</p>
                                         </div>
                                         <div class="flex items-center justify-between mb-3 text-gray-400">
                                             <div class="flex items-center">
@@ -165,7 +165,7 @@
                                                 </svg>
                                                 <span class="pl-3">Transmission:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->transmission_type}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->transmission_type}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -179,14 +179,14 @@
                                                 </svg>
                                                 <span class="pl-3">merk:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->merk}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->merk}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
                                                 <svg id="fi_15151163" enable-background="new 0 0 500 500" height="14" viewBox="0 0 500 500" width="14" xmlns="http://www.w3.org/2000/svg"><g fill="gold"><path d="m95.555 167.778-32.435 32.436c-11.875 11.876-11.162 31.069.714 42.944l73.718 73.719-116.782 99.568c-18.572 18.572-24.5 52.362-7.313 69.549l1.064 1.065c17.188 17.187 50.979 11.26 69.552-7.313l99.567-116.782 73.72 73.72c11.876 11.877 30.034 11.557 41.909-.318l32.438-32.436c11.411-11.414-224.739-247.564-236.152-236.152z"></path><path d="m260.597 2.736-145.729 145.729 1.002 1.001c23.906 2.852 232.022 210.955 235.17 235.127l145.706-145.706zm147.326 256.583c-20.881-1.286-43.47-16.875-32.938-34.337 10.533-17.461-5.355-31.949-32.644-6.048-27.287 25.9-45.899-6.705-22.84-22.837 23.06-16.132 7.207-47.374-17.21-38.198-24.418 9.174-34.449 63.542-58.747 49.041s25.915-35.646 44.888-69.861-3.331-42.472-31.304-18.656c-27.973 23.815-37.779 9.911-27.161-24.26 8.135-26.186-15.314-18.094-27.664-13.82l57.415-57.416 216.837 216.837-57.811 57.812c2.356-16.401 1.352-37.506-10.821-38.257z"></path><path d="m351.019 384.615.032.032c-.001-.018-.007-.037-.01-.055z"></path></g></svg>
                                                 <span class="pl-3">color:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->color}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->color}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -206,7 +206,7 @@
                                                     </svg>
                                                 <span class="pl-3">kilometers:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->kilometers}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->kilometers}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -229,7 +229,7 @@
                                                     </svg>
                                                 <span class="pl-3">fuel_type:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->fuel_type}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->fuel_type}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -237,7 +237,7 @@
                                                 </g></svg>
                                                 <span class="pl-3">yaer:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->year}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->year}}</p>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items- mt-4 text-lg">
@@ -245,7 +245,8 @@
                                             <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                         </div>
                                         
-                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
+                                           
+                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold text-base md:text-sm lg:text-lg md:py-1 md:px-2 lg:py-2 lg:px-4">
                                             meer weten
                                         </a>
                                     </div>                                
@@ -281,7 +282,7 @@
                                                 </svg>
                                                 <span class="pl-3">Doors:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->doors}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->doors}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400  justify-between">
                                             <div class="flex items-center">
@@ -310,7 +311,7 @@
                                                     </svg>
                                                 <span class="pl-3">Passengers:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->passengers}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->passengers}}</p>
                                         </div>
                                         <div class="flex items-center justify-between mb-3 text-gray-400">
                                             <div class="flex items-center">
@@ -321,7 +322,7 @@
                                                 </svg>
                                                 <span class="pl-3">Transmission:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->transmission_type}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->transmission_type}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -335,14 +336,14 @@
                                                 </svg>
                                                 <span class="pl-3">merk:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->merk}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->merk}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
                                                 <svg id="fi_15151163" enable-background="new 0 0 500 500" height="14" viewBox="0 0 500 500" width="14" xmlns="http://www.w3.org/2000/svg"><g fill="gold"><path d="m95.555 167.778-32.435 32.436c-11.875 11.876-11.162 31.069.714 42.944l73.718 73.719-116.782 99.568c-18.572 18.572-24.5 52.362-7.313 69.549l1.064 1.065c17.188 17.187 50.979 11.26 69.552-7.313l99.567-116.782 73.72 73.72c11.876 11.877 30.034 11.557 41.909-.318l32.438-32.436c11.411-11.414-224.739-247.564-236.152-236.152z"></path><path d="m260.597 2.736-145.729 145.729 1.002 1.001c23.906 2.852 232.022 210.955 235.17 235.127l145.706-145.706zm147.326 256.583c-20.881-1.286-43.47-16.875-32.938-34.337 10.533-17.461-5.355-31.949-32.644-6.048-27.287 25.9-45.899-6.705-22.84-22.837 23.06-16.132 7.207-47.374-17.21-38.198-24.418 9.174-34.449 63.542-58.747 49.041s25.915-35.646 44.888-69.861-3.331-42.472-31.304-18.656c-27.973 23.815-37.779 9.911-27.161-24.26 8.135-26.186-15.314-18.094-27.664-13.82l57.415-57.416 216.837 216.837-57.811 57.812c2.356-16.401 1.352-37.506-10.821-38.257z"></path><path d="m351.019 384.615.032.032c-.001-.018-.007-.037-.01-.055z"></path></g></svg>
                                                 <span class="pl-3">color:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->color}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->color}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -362,7 +363,7 @@
                                                     </svg>
                                                 <span class="pl-3">kilometers:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->kilometers}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->kilometers}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -385,7 +386,7 @@
                                                     </svg>
                                                 <span class="pl-3">fuel_type:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->fuel_type}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->fuel_type}}</p>
                                         </div>
                                         <div class="flex items-center mb-3 text-gray-400 justify-between">
                                             <div class="flex items-center">
@@ -393,15 +394,15 @@
                                                 </g></svg>
                                                 <span class="pl-3">yaer:</span>
                                             </div>
-                                            <p class="ml-2 text-white">{{$car->year}}</p>
+                                            <p class="text-[13px] md:text-[15px] lg:text-lg text-white">{{$car->year}}</p>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items- mt-4 text-lg">
                                         <div class="relative flex">
                                             <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                         </div>
-                                        
-                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
+                                              
+                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold text-base md:text-sm lg:text-lg md:py-1 md:px-2 lg:py-2 lg:px-4">
                                             meer weten
                                         </a>
                                     </div>                                

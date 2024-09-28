@@ -245,9 +245,10 @@
                                             <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                         </div>
                                         
-                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
+                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold text-base md:text-sm lg:text-lg md:py-1 md:px-2 lg:py-2 lg:px-4">
                                             meer weten
                                         </a>
+                                        
                                     </div>                                
                                 </div>
                             </a>
@@ -401,7 +402,8 @@
                                             <div class="text-gold font-bold relative  ">€{{$car->daily_rate}}</div><spam class="a_day text-gray-400">/day</spam>
                                         </div>
                                         
-                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold">
+                                               
+                                        <a href="#" class="bg-white text-black py-2 px-4 rounded-lg hover:bg-gold text-base md:text-sm lg:text-lg md:py-1 md:px-2 lg:py-2 lg:px-4">
                                             meer weten
                                         </a>
                                     </div>                                
