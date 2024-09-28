@@ -28,6 +28,30 @@
         <h2 class="text-3xl font-bold mb-6 text-white text-center">Auto Toevoegen</h2>
          <form action="{{ route('admin.store') }}" method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @csrf
+            <div class="flex justify-between">
+                <div class="w-full p-1">
+                    <label for="year" class="block text-gray-200 font-medium mb-1 text-center">doors</label>
+                    <select id="doors" name="doors"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                    </select>
+                    @error('doors')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="w-full p-1">
+                    <label for="passengers" class="block text-gray-200 font-medium mb-1 text-center">passengers</label>
+
+                    <select id="passengers" name="passengers"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="2">2</option>
+                        <option value="4">5</option>
+                        <option value="4">7</option>
+                    </select>
+                      @error('passengers')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
             <!-- Brand -->
             <div class="flex justify-between">
                 <div class="w-full p-1">
@@ -39,7 +63,7 @@
                     
                 </div>
                 <div class="w-full p-1">
-                    <label for="year" class="block text-gray-200 font-medium mb-1 text-center">Model</label>
+                    <label for="model" class="block text-gray-200 font-medium mb-1 text-center">Model</label>
 
                     <input type="text" id="model"  name="model"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                       @error('model')
@@ -163,7 +187,6 @@
                     @enderror
                 </div>
             </div>
-         
             <!-- Images -->
             <div class="flex justify-between">
                 <div class="w-full p-1">

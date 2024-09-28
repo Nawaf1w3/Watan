@@ -37,6 +37,10 @@ class CarsAdminController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
+            'doors'  =>'required|string|in:2,4',
+
+            'passengers'  =>'required|string|in:2,5,7',
+
             'car_type'  =>'required|string|in:taxi,private',
             'merk' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -97,6 +101,8 @@ class CarsAdminController extends Controller
     
         // Create a new Car instance and assign all attributes including image paths
         $car = new Car();
+        $car->doors = $validated['doors'];
+        $car->passengers = $validated['passengers'];
         $car->car_type = $validated['car_type'];
         $car->merk = $validated['merk'];
         $car->model = $validated['model'];
