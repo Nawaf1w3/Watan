@@ -38,9 +38,7 @@ class CarsAdminController extends Controller
         // Validate the request data
         $validated = $request->validate([
             'doors'  =>'required|string|in:2,4',
-
             'passengers'  =>'required|string|in:2,5,7',
-
             'car_type'  =>'required|string|in:taxi,private',
             'merk' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -155,6 +153,10 @@ class CarsAdminController extends Controller
     {
         // Validate incoming request data
         $validated = $request->validate([
+            'doors'  =>'required|string|in:2,4',
+
+            'passengers'  =>'required|string|in:2,5,7',
+
             'car_type'  =>'required|string|in:taxi,private',
             'merk' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -204,6 +206,8 @@ class CarsAdminController extends Controller
         }
     
         // Update other car attributes
+        $car->doors = $validated['doors'];
+        $car->passengers = $validated['passengers'];
         $car->car_type = $validated['car_type'];
         $car->merk = $validated['merk'];
         $car->model = $validated['model'];
@@ -245,4 +249,26 @@ class CarsAdminController extends Controller
     
         return redirect()->route('admin.list')->with('success', 'Car and associated images deleted successfully');
     }
+
+    public function deleteImage(Car $car, $image)
+    {
+        // Get the image column name dynamically (e.g. image_1, image_2, etc.)
+        $imageField = $image;
+
+        // Check if the car has the image and if it exists in storage
+        if (!empty($car->$imageField)) {
+            // Delete the file from storage
+            Storage::delete('public/' . $car->$imageField);
+
+            // Set the image field to null in the database
+            $car->$imageField = null;
+            $car->save();
+
+            // Return success response or redirect
+            return redirect()->back()->with('success', 'Afbeelding succesvol verwijderd');
+        }
+
+        return redirect()->back()->with('error', 'Geen afbeelding gevonden om te verwijderen');
+    }
+
 }

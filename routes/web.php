@@ -20,6 +20,8 @@ Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
     Route::get('/admin/edit/{id}', [CarsAdminController::class, 'edit'])->name('admin.edit')->middleware('admin');
     Route::put('/admin_update/{id}', [CarsAdminController::class, 'update'])->name('admin.update')->middleware('admin');
     Route::delete('/admin_delete/{id}', [CarsAdminController::class, 'destroy'])->name('admin.delete')->middleware('admin');
+    Route::delete('/cars/{car}/delete-image/{image}', [CarsAdminController::class, 'deleteImage'])->name('cars.deleteImage');
+
 
     //taxi
     Route::get('/taxi', [CarsController::class, 'taxi'])->name('taxi.list');
