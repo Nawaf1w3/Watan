@@ -17,7 +17,7 @@
         <div id="navbar-menu" class="hidden w-full md:block md:w-auto">
             <ul class="bg-gg border-gg p-4 md:p-0 mt-4 md:mt-0 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:bg-transparent md:border-transparent font-medium flex flex-col">
                 <li>
-                    <a href="{{route('dashboard')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold" aria-current="page">Home</a>
+                    <a href="{{route('home')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">About</a>
@@ -27,7 +27,14 @@
                 </li>
                 <li>
                     <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Contact</a>
-                </li>     
+                </li>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <li>
+                                <a href="{{ url('/admin') }}" class="text-white hover:text-yellow-400">Admin Panel</a>
+                            </li>
+                        @endif
+                    @endauth   
                 {{-- <li>
                     <a href="{{route('admin.list')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Admin</a>
                 </li> --}}
@@ -49,6 +56,7 @@
                         </li>
                     </ul>
                 </li>
+         
                 <!-- Dropdown Button as List Item -->
             </ul>
         </div>

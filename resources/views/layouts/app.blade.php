@@ -62,7 +62,7 @@
                 <div class="container mx-auto">
                     <div class="flex flex-wrap justify-evenly">
                         <div class="w-full md:w-1/3 mb-8 md:mb-0">
-                            <h2 class="text-white text-2xl font-bold mb-4">Contact</h2>
+                            <h2 class="text-white text-2xl font-bold mb-4">CONTACT</h2>
                             <ul>
                                 <li class="mb-4">
                                     <a href="tel:+31624136771" target="_blank" class="flex items-center text-white">
@@ -105,7 +105,7 @@
                             </ul>
                         </div>
                         <div class="w-full md:w-1/6 mb-8 md:mb-0">
-                            <h2 class="text-white text-2xl font-bold mb-4">Site menu</h2>
+                            <h2 class="text-white text-2xl font-bold mb-4">SITE MENUE</h2>
                             <ul class="flex flex-wrap">
                                 <li class="w-1/2 mb-4">
                                     <a href="{{route('dashboard')}}" class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold" aria-current="page">Home</a>
@@ -138,16 +138,37 @@
                                 </li>
                             </ul>
                         </div>
-            
+
+                        <div class="w-full md:w-1/6 mb-8 md:mb-0">
+                            <h2 class="text-white text-2xl font-bold mb-4">Bezorging/Ophalen of inlever gebieden</h2>
+                            <ul class="flex flex-wrap">
+                                <li class="w-1/2 mb-4">
+                                    <p class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white " aria-current="page">Amsterdam</p>
+                                </li>
+                                <li class="w-1/2 mb-4">
+                                    <p class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white " aria-current="page">Harlem</p>
+
+                                </li>
+                                <li class="w-1/2 mb-4">
+                                    <p class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white " aria-current="page">Leiden</p>
+                                </li>
+                                <li class="w-1/2 mb-4">
+                                    <p class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white " aria-current="page">Zandaam</p>
+                                </li>
+                                <li class="w-1/2 mb-4">
+                                    <a href="#" class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="bg-black-dark pt-2 pb-2">
                 <div class="">
-                <div class="flex justify-center text-gray-500">
-                            Watan Bedrijf 
-                            | KVK nr: 324234234 | BTW nr: Nl1111111111122 
-                </div>
+                    <div class="flex justify-center text-gray-500">
+                        Watan Bedrijf 
+                        | KVK nr: 324234234 | BTW nr: Nl1111111111122 
+                    </div>
                 </div>
             </div>
         </div>

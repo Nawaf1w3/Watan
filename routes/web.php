@@ -6,12 +6,12 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
 
 
-Route::get('/dashboard', [CarsController::class, 'index'])->name('dashboard');
+    //home routing 
+    Route::get('/', [CarsController::class, 'index'])->name('dashboard');
+    Route::get('/home', [CarsController::class, 'index'])->name('home');
+
 
     //admin routing
     Route::get('/admin', [CarsAdminController::class, 'index'])->name('admin.list')->middleware('admin');
