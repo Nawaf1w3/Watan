@@ -155,21 +155,25 @@
                                 <li class="w-1/2 mb-4">
                                     <p class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white " aria-current="page">Zandaam</p>
                                 </li>
-                                <li class="w-1/2 mb-4">
-                                    <a href="#" class="block  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gold md:p-0 text-white md:dark:hover:text-gold dark:hover:text-gold">Contact</a>
-                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-black-dark pt-2 pb-2">
-                <div class="">
-                    <div class="flex justify-center text-gray-500">
-                        Watan Bedrijf 
-                        | KVK nr: 324234234 | BTW nr: Nl1111111111122 
+        </div>
+        <div class="bg-gg pt-2 pb-2">
+            <div class="pb-2 ">
+                <div class="flex justify-evenly items-center text-gray-500">
+                <div class="flex">
+                    <p class="text-gold">Watan Bedrijf</p> 
+                    | KVK nr: 324234234 | BTW nr: Nl1111111111122
+                </div>
+            
+                    <div class="text-right">
+                        <p class="text-gray-500">Ontwikeld bij <a href="https://nawaf.nl" class="text-gold"> Nawaf Alkhalaf</a></p>
                     </div>
                 </div>
+          
             </div>
         </div>
         <script>

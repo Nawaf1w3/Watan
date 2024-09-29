@@ -4,6 +4,7 @@ use App\Http\Controllers\CarsAdminController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,15 +32,15 @@ use Illuminate\Support\Facades\Route;
     //private
     Route::get('/private', [CarsController::class, 'private'])->name('private.list');
     Route::get('/private/{id}', [CarsController::class, 'showPrivate'])->name('private.show');
-    Route::middleware('auth')->group(function () {
 
 
+    
     //services
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
 
-
-
-
+    
+    //Middleware
+    Route::middleware('auth')->group(function () {
     //account
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

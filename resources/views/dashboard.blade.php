@@ -115,7 +115,7 @@
                 Onze Diensten en Meer
             </h1>
             <p class="text-white text-[1.10rem] leading-[1.20rem] md:text-[1.25rem] md:leading-[1.75rem]">
-                Bij [Bedrijfsnaam] gaan we verder dan alleen autoverhuur. Wij bieden een breed scala aan diensten die uw reiservaring naar een hoger niveau tillen. Of u nu op zoek bent naar een luxe voertuig, een betrouwbare stadsauto, of extra opties zoals GPS en kinderzitjes, wij hebben alles wat u nodig heeft. Kies voor gemak, flexibiliteit en een ongeëvenaarde klantenservice. Ontdek onze uitgebreide mogelijkheden en ervaar het verschil!
+                Bij Watan gaan we verder dan alleen autoverhuur. Wij bieden een breed scala aan diensten die uw reiservaring naar een hoger niveau tillen. Of u nu op zoek bent naar een luxe voertuig, een betrouwbare stadsauto, of extra opties zoals GPS en kinderzitjes, wij hebben alles wat u nodig heeft. Kies voor gemak, flexibiliteit en een ongeëvenaarde klantenservice. Ontdek onze uitgebreide mogelijkheden en ervaar het verschil!
             </p>
         </div>
         
@@ -147,7 +147,7 @@
                         <!-- Shadow Gradient with Text -->
                         <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none">
                             <div class="relative text-right h-full w-full bg-gradient-to-b from-transparent via-transparent to-black flex items-end justify-end p-4 opacity-custom">
-                                <div class="text-right ml-16"> <!-- Added margin-left to shift it right -->
+                                <div class="text-right ml-24"> <!-- Added margin-left to shift it right -->
                                     <h1 class="text-gold text-xl font-bold">Pechhulp</h1>
                                     <p class="text-white font-bold">waar en wanneer u het nodig heeft. Wij zorgen ervoor dat u veilig en snel weer op weg kunt.</p>
                                 </div>
@@ -198,7 +198,7 @@
                         <!-- Shadow Gradient with Text -->
                         <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none">
                             <div class="relative text-right h-full w-full bg-gradient-to-b from-transparent via-transparent to-black flex items-end justify-end p-4 opacity-custom">
-                                <div class="text-right ml-16"> <!-- Added margin-left to shift it right -->
+                                <div class="text-right ml-24"> <!-- Added margin-left to shift it right -->
                                     <h1 class="text-gold text-xl font-bold">Autobezorging en Ophalen</h1>
                                     <p class="text-white font-bold">Gemakkelijke bezorgen en ophalen van uw auto.</p>
                                 </div>
@@ -245,7 +245,7 @@
                         <!-- Shadow Gradient with Text -->
                         <div class="absolute bottom-0 right-0 w-full h-full pointer-events-none">
                             <div class="relative text-right h-full w-full bg-gradient-to-b from-transparent via-transparent to-black flex items-end justify-end p-4 opacity-custom">
-                                <div class="text-right ml-16"> <!-- Added margin-left to shift it right -->
+                                <div class="text-right ml-24"> <!-- Added margin-left to shift it right -->
                                     <h1 class="text-gold text-xl font-bold">autolader</h1>
                                     <p class="text-white font-bold">Snelle en betrouwbare oplaadservice voor elektrische voertuigen</p>
                                 </div>

@@ -44,7 +44,7 @@
 
                     <select id="passengers" name="passengers"  class="w-full p-2 border bg-gg text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="2">2</option>
-                        <option value="4">5</option>
+                        <option value="5">5</option>
                         <option value="4">7</option>
                     </select>
                       @error('passengers')
