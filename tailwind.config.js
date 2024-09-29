@@ -15,7 +15,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                gold: '#FFD700', // Customize the gold color as needed
+                gold: '#f5b754', // Customize the gold color as needed
                 'gold': '#f5b754', // Optional lighter gold color
                 'black': '#1b1b1b', // Custom black color
                 'light_black': '#1b1b1b',

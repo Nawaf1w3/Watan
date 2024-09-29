@@ -26,7 +26,7 @@ class CarsController extends Controller
     }
     public function private()
     {
-        $cars = Car::where('car_type', 'private')->get();
+        $cars = Car::where('car_type', 'private')->paginate(6);
 
         return view('private.list',compact('cars'));
     }

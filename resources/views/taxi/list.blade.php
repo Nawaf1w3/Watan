@@ -412,6 +412,9 @@
                         </li>
                     @endforeach
                 </ul>
+                {{-- <div class="mt-6 pb-10 flex justify-center self-center">
+                    {{ $cars->links('vendor.pagination.custom') }}
+                </div> --}}
             </div>
         </div>
     </section>       
