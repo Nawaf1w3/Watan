@@ -1,0 +1,45 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  sshEndpoint: 'kijkeerst-ssh'
+
+jobs:
+- job: LaravelDeploy
+  displayName: 'Deploy Laravel to kijkeerst.nl'
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+    displayName: 'Use Node.js 18'
+
+  - script: |
+      php -v
+      composer --version || curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
+      composer install --no-interaction --prefer-dist --optimize-autoloader
+    displayName: 'Install PHP Dependencies with Composer'
+
+  - script: |
+      npm install
+      npm run build
+    displayName: 'Install and Build Frontend (NPM)'
+
+  - script: |
+      php artisan migrate --force
+      php artisan storage:link
+    displayName: 'Run Laravel Commands'
+
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: $(sshEndpoint)
+      sourceFolder: '$(System.DefaultWorkingDirectory)'
+      contents: '**/*'
+      targetFolder: '/var/www/kijkeerst.nl'
+      cleanTargetFolder: false
+      overwrite: true
+    displayName: 'Deploy Code to VPS'
