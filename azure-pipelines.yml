@@ -2,34 +2,67 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 jobs:
-- job: build_and_deploy
+- job: InstallNode
+  displayName: 'Install Node.js'
+  pool:
+    name: 'Azure Pipelines'
   steps:
   - script: |
       curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
       sudo apt-get install -y nodejs
     displayName: 'Install Node.js'
 
+- job: InstallPHP
+  displayName: 'Install PHP 7.4'
+  dependsOn: InstallNode
+  pool:
+    name: 'Azure Pipelines'
+  steps:
   - script: |
       sudo apt-get install -y php7.4 php7.4-cli php7.4-fpm php7.4-mbstring php7.4-xml php7.4-zip
     displayName: 'Install PHP 7.4'
 
+- job: InstallComposer
+  displayName: 'Install Composer Dependencies'
+  dependsOn: InstallPHP
+  pool:
+    name: 'Azure Pipelines'
+  steps:
   - script: |
       curl -sS https://getcomposer.org/installer | php
       php composer.phar install --no-interaction --prefer-dist
     displayName: 'Install Composer Dependencies'
 
+- job: InstallNPM
+  displayName: 'Install and Build npm dependencies'
+  dependsOn: InstallComposer
+  pool:
+    name: 'Azure Pipelines'
+  steps:
   - script: |
       npm install
       npm run build
     displayName: 'Install and Build npm dependencies'
 
+- job: RunMigrations
+  displayName: 'Run Laravel Migrations'
+  dependsOn: InstallNPM
+  pool:
+    name: 'Azure Pipelines'
+  steps:
   - script: |
       php artisan migrate --force
     displayName: 'Run Laravel Migrations'
 
+- job: CreateStorageLink
+  displayName: 'Create Storage Link'
+  dependsOn: RunMigrations
+  pool:
+    name: 'Azure Pipelines'
+  steps:
   - script: |
       php artisan storage:link
     displayName: 'Create Storage Link'
