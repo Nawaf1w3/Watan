@@ -6,18 +6,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  sshEndpoint: 'kijkeerst-ssh'
-  deployPath: '/var/www/kijkeerst'
-  sshUser: 'ubuntu'
-  sshHost: '123.45.67.89'
-  targetPath: '/var/www/kijkeerst'
-  sshKeyPath: '/home/vsts/.ssh/id_rsa'
-  rsyncFilterFile: 'rsync-filter.txt'
-
 jobs:
 - job: LaravelDeploy
-  displayName: 'Deploy Laravel to VPS'
+  displayName: 'Deploy Laravel to kijkeerst.nl'
   steps:
 
   - task: UseNode@1
@@ -27,54 +18,46 @@ jobs:
 
   - script: |
       php -v
+      composer --version || curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
       composer install --no-interaction --prefer-dist --optimize-autoloader
-    displayName: 'Install PHP Dependencies'
+    displayName: 'Install PHP Dependencies with Composer'
 
   - script: |
-      npm ci
+      npm install
       npm run build
-    displayName: 'Build Frontend'
+    displayName: 'Install and Build Frontend (NPM)'
 
   - script: |
-      echo "- /.phpunit.cache" > $(rsyncFilterFile)
-      echo "- /node_modules" >> $(rsyncFilterFile)
-      echo "- /public/build" >> $(rsyncFilterFile)
-      echo "- /public/hot" >> $(rsyncFilterFile)
-      echo "- /public/storage" >> $(rsyncFilterFile)
-      echo "- /storage/*.key" >> $(rsyncFilterFile)
-      echo "- /vendor" >> $(rsyncFilterFile)
-      echo "- /.env" >> $(rsyncFilterFile)
-      echo "- /.env.*" >> $(rsyncFilterFile)
-      echo "- /.phpactor.json" >> $(rsyncFilterFile)
-      echo "- /.phpunit.result.cache" >> $(rsyncFilterFile)
-      echo "- /Homestead.*" >> $(rsyncFilterFile)
-      echo "- /auth.json" >> $(rsyncFilterFile)
-      echo "- /npm-debug.log" >> $(rsyncFilterFile)
-      echo "- /yarn-error.log" >> $(rsyncFilterFile)
-      echo "- /.fleet" >> $(rsyncFilterFile)
-      echo "- /.idea" >> $(rsyncFilterFile)
-      echo "- /.vscode" >> $(rsyncFilterFile)
-    displayName: 'Create rsync ignore filter'
+      php artisan migrate --force
+      php artisan storage:link
+    displayName: 'Run Laravel Commands'
 
   - script: |
-      mkdir -p ~/.ssh
-      echo "$SSH_PRIVATE_KEY" > $(sshKeyPath)
-      chmod 600 $(sshKeyPath)
-    env:
-      SSH_PRIVATE_KEY: $(mySSHKey)
-    displayName: 'Prepare SSH Key for rsync'
+      echo "Creating rsync filter file..."
+      echo "- /.phpunit.cache" > $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /node_modules" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /public/build" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /public/hot" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /public/storage" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /storage/*.key" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /vendor" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.env" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.env.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.phpactor.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.phpunit.result.cache" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /Homestead.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /auth.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /npm-debug.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /yarn-error.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.fleet" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.idea" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+      echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+    displayName: 'Create rsync Filter File'
 
-  - script: |
-      rsync -az --filter="merge rsync-filter.txt" -e "ssh -i /home/vsts/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ $(sshUser)@$(sshHost):$(targetPath)
-    displayName: 'Deploy with rsync'
-
-  - task: SSH@0
+  - task: Bash@3
     inputs:
-      sshEndpoint: $(sshEndpoint)
-      runOptions: 'inline'
-      inline: |
-        sudo chown -R www-data:www-data $(deployPath)
-        cd $(deployPath)
-        php artisan migrate --force
-        php artisan storage:link
-    displayName: 'Set Permissions and Run Artisan Commands'
+      targetType: 'inline'
+      script: |
+        echo "Deploying using rsync..."
+        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i /home/vsts/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst
+    displayName: 'Deploy with rsync'
