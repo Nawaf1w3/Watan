@@ -41,17 +41,14 @@ jobs:
       script: |
         echo "Deploying using rsync..."
         
-        # Debug: Check if SSH_PRIVATE_KEY is being set correctly
-        echo "$(SSH_PRIVATE_KEY)"  # This should output the SSH key, but be careful, you should remove this after testing.
-        
-        # Create SSH directory
-        mkdir -p ~/.ssh
-        
-        # Check if SSH_PRIVATE_KEY is correctly set
+        # Ensure the environment variable is correctly accessed
         if [[ -z "$(SSH_PRIVATE_KEY)" ]]; then
           echo "Error: SSH key not found."
           exit 1
         fi
+
+        # Create SSH directory
+        mkdir -p ~/.ssh
         
         # Write SSH key to the correct file
         echo "$(SSH_PRIVATE_KEY)" > ~/.ssh/id_rsa
