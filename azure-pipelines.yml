@@ -1,57 +1,30 @@
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Nawaf'  # Use your custom agent pool
 
 jobs:
-- job: InstallNode
-  displayName: 'Install Node.js'
-  pool:
-    name: 'Nawaf'
+- job: InstallDependencies
+  displayName: 'Install Dependencies'
   steps:
   - script: |
       curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-      sudo apt-get install -y nodejs
-    displayName: 'Install Node.js'
-
-- job: InstallPHP
-  displayName: 'Install PHP 7.4'
-  dependsOn: InstallNode
-  pool:
-    name: 'Nawaf'
-  steps:
-  - script: |
-      sudo apt-get install -y php7.4 php7.4-cli php7.4-fpm php7.4-mbstring php7.4-xml php7.4-zip
-    displayName: 'Install PHP 7.4'
+      sudo apt-get install -y nodejs php7.4 php7.4-cli php7.4-fpm php7.4-mbstring php7.4-xml php7.4-zip
+    displayName: 'Install Node.js, PHP 7.4'
 
 - job: InstallComposer
   displayName: 'Install Composer Dependencies'
-  dependsOn: InstallPHP
-  pool:
-    name: 'Nawaf'
+  dependsOn: InstallDependencies
   steps:
   - script: |
       curl -sS https://getcomposer.org/installer | php
       php composer.phar install --no-interaction --prefer-dist
     displayName: 'Install Composer Dependencies'
 
-- job: InstallNPM
-  displayName: 'Install and Build npm dependencies'
-  dependsOn: InstallComposer
-  pool:
-    name: 'Nawaf'
-  steps:
-  - script: |
-      npm install
-      npm run build
-    displayName: 'Install and Build npm dependencies'
-
 - job: RunMigrations
   displayName: 'Run Laravel Migrations'
-  dependsOn: InstallNPM
-  pool:
-    name: 'Nawaf'
+  dependsOn: InstallComposer
   steps:
   - script: |
       php artisan migrate --force
@@ -60,8 +33,6 @@ jobs:
 - job: CreateStorageLink
   displayName: 'Create Storage Link'
   dependsOn: RunMigrations
-  pool:
-    name: 'Nawaf'
   steps:
   - script: |
       php artisan storage:link
