@@ -9,8 +9,9 @@ pool:
 variables:
   sshEndpoint: 'kijkeerst-ssh'
   deployPath: '/var/www/kijkeerst'
-  sshUser: 'your_ssh_user'         # CHANGE THIS
-  sshHost: 'your.server.ip'        # CHANGE THIS
+  sshUser: 'ubuntu'
+  sshHost: '123.45.67.89'
+  targetPath: '/var/www/kijkeerst'
   sshKeyPath: '/home/vsts/.ssh/id_rsa'
   rsyncFilterFile: 'rsync-filter.txt'
 
@@ -64,7 +65,7 @@ jobs:
     displayName: 'Prepare SSH Key for rsync'
 
   - script: |
-      rsync -az --filter="merge $(rsyncFilterFile)" -e "ssh -i $(sshKeyPath) -o StrictHostKeyChecking=no" ./ $(sshUser)@$(sshHost):$(deployPath)
+      rsync -az --filter="merge rsync-filter.txt" -e "ssh -i /home/vsts/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ $(sshUser)@$(sshHost):$(targetPath)
     displayName: 'Deploy with rsync'
 
   - task: SSH@0
