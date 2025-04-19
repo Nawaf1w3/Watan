@@ -6,11 +6,14 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  sshSecret: '$(ssh_secret)'  # Reference to the variable group
+
 jobs:
 - job: LaravelDeploy
   displayName: 'Deploy Laravel to kijkeerst.nl'
   steps:
-
+  
   - task: UseNode@1
     inputs:
       version: '18.x'
@@ -32,33 +35,39 @@ jobs:
       php artisan storage:link
     displayName: 'Run Laravel Commands'
 
-  - script: |
-      echo "Creating rsync filter file..."
-      echo "- /.phpunit.cache" > $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /node_modules" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /public/build" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /public/hot" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /public/storage" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /storage/*.key" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /vendor" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.env" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.env.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.phpactor.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.phpunit.result.cache" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /Homestead.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /auth.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /npm-debug.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /yarn-error.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.fleet" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.idea" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-      echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-    displayName: 'Create rsync Filter File'
-
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
         echo "Deploying using rsync..."
-        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i $(SSH_KEY_PATH) -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst
+        
+        # Create SSH directory
+        mkdir -p ~/.ssh
+        echo "$(SSH_PRIVATE_KEY)" > ~/.ssh/id_rsa
+        
+        # Set permissions for the SSH key
+        chmod 600 ~/.ssh/id_rsa
+        
+        # Create an rsync filter file
+        echo "- /.phpunit.cache" > $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /node_modules" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /public/build" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /public/hot" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /public/storage" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /storage/*.key" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /vendor" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.env" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.env.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.phpactor.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.phpunit.result.cache" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /Homestead.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /auth.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /npm-debug.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /yarn-error.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.fleet" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.idea" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
+        
+        # Deploy using rsync with the SSH key
+        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst.nl
     displayName: 'Deploy with rsync'
-
