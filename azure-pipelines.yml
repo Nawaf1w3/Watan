@@ -9,11 +9,14 @@ pool:
 variables:
   sshEndpoint: 'kijkeerst-ssh'
   deployPath: '/var/www/kijkeerst'
+  sshUser: 'your_ssh_user'         # CHANGE THIS
+  sshHost: 'your.server.ip'        # CHANGE THIS
+  sshKeyPath: '/home/vsts/.ssh/id_rsa'
   rsyncFilterFile: 'rsync-filter.txt'
 
 jobs:
 - job: LaravelDeploy
-  displayName: 'Deploy Laravel to kijkeerst VPS'
+  displayName: 'Deploy Laravel to VPS'
   steps:
 
   - task: UseNode@1
@@ -23,49 +26,54 @@ jobs:
 
   - script: |
       php -v
-      composer --version || curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
       composer install --no-interaction --prefer-dist --optimize-autoloader
-    displayName: 'Install PHP Dependencies with Composer'
+    displayName: 'Install PHP Dependencies'
 
   - script: |
       npm ci
       npm run build
-    displayName: 'Install and Build Frontend'
+    displayName: 'Build Frontend'
 
   - script: |
-      php artisan migrate --force
-      php artisan storage:link
-    displayName: 'Run Laravel Artisan Commands'
+      echo "- /.phpunit.cache" > $(rsyncFilterFile)
+      echo "- /node_modules" >> $(rsyncFilterFile)
+      echo "- /public/build" >> $(rsyncFilterFile)
+      echo "- /public/hot" >> $(rsyncFilterFile)
+      echo "- /public/storage" >> $(rsyncFilterFile)
+      echo "- /storage/*.key" >> $(rsyncFilterFile)
+      echo "- /vendor" >> $(rsyncFilterFile)
+      echo "- /.env" >> $(rsyncFilterFile)
+      echo "- /.env.*" >> $(rsyncFilterFile)
+      echo "- /.phpactor.json" >> $(rsyncFilterFile)
+      echo "- /.phpunit.result.cache" >> $(rsyncFilterFile)
+      echo "- /Homestead.*" >> $(rsyncFilterFile)
+      echo "- /auth.json" >> $(rsyncFilterFile)
+      echo "- /npm-debug.log" >> $(rsyncFilterFile)
+      echo "- /yarn-error.log" >> $(rsyncFilterFile)
+      echo "- /.fleet" >> $(rsyncFilterFile)
+      echo "- /.idea" >> $(rsyncFilterFile)
+      echo "- /.vscode" >> $(rsyncFilterFile)
+    displayName: 'Create rsync ignore filter'
 
-  # Create rsync filter file for exclusion
   - script: |
-      echo "- .git/" > $(rsyncFilterFile)
-      echo "- node_modules/" >> $(rsyncFilterFile)
-      echo "- storage/logs/" >> $(rsyncFilterFile)
-      echo "- .env" >> $(rsyncFilterFile)
-    displayName: 'Create rsync filter file'
+      mkdir -p ~/.ssh
+      echo "$SSH_PRIVATE_KEY" > $(sshKeyPath)
+      chmod 600 $(sshKeyPath)
+    env:
+      SSH_PRIVATE_KEY: $(mySSHKey)
+    displayName: 'Prepare SSH Key for rsync'
 
-  - task: CopyFilesOverSSH@0
-    inputs:
-      sshEndpoint: $(sshEndpoint)
-      sourceFolder: '$(System.DefaultWorkingDirectory)'
-      contents: '**/*'
-      targetFolder: $(deployPath)
-      cleanTargetFolder: false
-      overwrite: true
-    displayName: '[TEMP] Fallback File Sync - consider using rsync for delta updates'
-
-  # Optionally: Use rsync via SSH for delta deployment (recommended)
   - script: |
-      rsync -avz --delete --filter='merge $(rsyncFilterFile)' ./ $(sshEndpointUser)@$(sshEndpointHost):$(deployPath)
-    condition: false # Set to `true` once SSH key auth + host known
-    displayName: '[OPTIONAL] Rsync incremental deploy'
+      rsync -az --filter="merge $(rsyncFilterFile)" -e "ssh -i $(sshKeyPath) -o StrictHostKeyChecking=no" ./ $(sshUser)@$(sshHost):$(deployPath)
+    displayName: 'Deploy with rsync'
 
-  # Set correct ownership (if needed)
   - task: SSH@0
     inputs:
       sshEndpoint: $(sshEndpoint)
       runOptions: 'inline'
       inline: |
         sudo chown -R www-data:www-data $(deployPath)
-    displayName: 'Fix ownership to www-data'
+        cd $(deployPath)
+        php artisan migrate --force
+        php artisan storage:link
+    displayName: 'Set Permissions and Run Artisan Commands'
