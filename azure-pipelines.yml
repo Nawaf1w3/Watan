@@ -7,11 +7,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  - group: SSH_Secrets  # Reference to the variable group SSH_Secrets
+  sshEndpoint: 'kijkeerst-ssh'
+  deployPath: '/var/www/kijkeerst'
+  rsyncFilterFile: 'rsync-filter.txt'
 
 jobs:
 - job: LaravelDeploy
-  displayName: 'Deploy Laravel to kijkeerst.nl'
+  displayName: 'Deploy Laravel to kijkeerst VPS'
   steps:
 
   - task: UseNode@1
@@ -26,74 +28,44 @@ jobs:
     displayName: 'Install PHP Dependencies with Composer'
 
   - script: |
-      npm install
+      npm ci
       npm run build
-    displayName: 'Install and Build Frontend (NPM)'
+    displayName: 'Install and Build Frontend'
 
   - script: |
       php artisan migrate --force
       php artisan storage:link
-    displayName: 'Run Laravel Commands'
+    displayName: 'Run Laravel Artisan Commands'
 
-  - task: Bash@3
+  # Create rsync filter file for exclusion
+  - script: |
+      echo "- .git/" > $(rsyncFilterFile)
+      echo "- node_modules/" >> $(rsyncFilterFile)
+      echo "- storage/logs/" >> $(rsyncFilterFile)
+      echo "- .env" >> $(rsyncFilterFile)
+    displayName: 'Create rsync filter file'
+
+  - task: CopyFilesOverSSH@0
     inputs:
-      targetType: 'inline'
-      script: |
-        echo "Deploying using rsync..."
-        
-        # Ensure the environment variable is correctly accessed
-        # Using the exact variable name as configured in Azure DevOps
-        if [[ -z "$SSH_PRIVATE_KEY" ]]; then
-          echo "Error: SSH key not found."
-          exit 1
-        fi
+      sshEndpoint: $(sshEndpoint)
+      sourceFolder: '$(System.DefaultWorkingDirectory)'
+      contents: '**/*'
+      targetFolder: $(deployPath)
+      cleanTargetFolder: false
+      overwrite: true
+    displayName: '[TEMP] Fallback File Sync - consider using rsync for delta updates'
 
-        # Create SSH directory
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-        
-        # Write SSH key to the correct file
-        # Using the exact variable name as configured in Azure DevOps
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        
-        # Option for base64 encoded keys (uncomment if needed)
-        # echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
-        
-        # Set permissions for the SSH key
-        chmod 600 ~/.ssh/id_rsa
-        
-        # Debug: Check permissions and key content
-        ls -la ~/.ssh/id_rsa
-        wc -l ~/.ssh/id_rsa
-        
-        # Add server to known hosts
-        ssh-keyscan -H 45.9.191.34 >> ~/.ssh/known_hosts
-        chmod 600 ~/.ssh/known_hosts
-        
-        # Test SSH connection with verbose output
-        echo "Testing SSH connection..."
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -v root@45.9.191.34 exit || echo "SSH test connection failed but continuing with deployment"
-        
-        # Create an rsync filter file
-        echo "- /.phpunit.cache" > $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /node_modules" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /public/build" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /public/hot" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /public/storage" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /storage/*.key" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /vendor" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.env" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.env.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.phpactor.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.phpunit.result.cache" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /Homestead.*" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /auth.json" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /npm-debug.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /yarn-error.log" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.fleet" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.idea" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
-        
-        # Deploy using rsync with the SSH key - using root user as specified
-        rsync -azv --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ root@45.9.191.34:/var/www/kijkeerst.nl
-    displayName: 'Deploy with rsync'
+  # Optionally: Use rsync via SSH for delta deployment (recommended)
+  - script: |
+      rsync -avz --delete --filter='merge $(rsyncFilterFile)' ./ $(sshEndpointUser)@$(sshEndpointHost):$(deployPath)
+    condition: false # Set to `true` once SSH key auth + host known
+    displayName: '[OPTIONAL] Rsync incremental deploy'
+
+  # Set correct ownership (if needed)
+  - task: SSH@0
+    inputs:
+      sshEndpoint: $(sshEndpoint)
+      runOptions: 'inline'
+      inline: |
+        sudo chown -R www-data:www-data $(deployPath)
+    displayName: 'Fix ownership to www-data'
