@@ -42,6 +42,7 @@ jobs:
         echo "Deploying using rsync..."
         
         # Ensure the environment variable is correctly accessed
+        # Using the exact variable name as configured in Azure DevOps
         if [[ -z "$SSH_PRIVATE_KEY" ]]; then
           echo "Error: SSH key not found."
           exit 1
@@ -52,10 +53,10 @@ jobs:
         chmod 700 ~/.ssh
         
         # Write SSH key to the correct file
-        # Option 1: If your key is in standard format
+        # Using the exact variable name as configured in Azure DevOps
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         
-        # Option 2: If your key is base64 encoded, uncomment the line below and comment the line above
+        # Option for base64 encoded keys (uncomment if needed)
         # echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
         
         # Set permissions for the SSH key
@@ -94,5 +95,5 @@ jobs:
         echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
         
         # Deploy using rsync with the SSH key - using root user as specified
-        rsync -azv --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ root@45.9.191.34:/var/www/kijkeerst
+        rsync -azv --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ root@45.9.191.34:/var/www/kijkeerst.nl
     displayName: 'Deploy with rsync'
