@@ -59,5 +59,6 @@ jobs:
       targetType: 'inline'
       script: |
         echo "Deploying using rsync..."
-        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i /home/vsts/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst
+        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i $(SSH_KEY_PATH) -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst
     displayName: 'Deploy with rsync'
+
