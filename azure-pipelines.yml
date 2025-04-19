@@ -4,55 +4,42 @@ trigger:
       - main
 
 pool:
-  name: 'Nawaf'
+  vmImage: 'ubuntu-latest'
 
 variables:
-  SSH_USER: azureuser            # ← your SSH username on the VPS
-  SSH_HOST: kijkeerst.nl         # ← your VPS domain or IP
-  SSH_KEY: $(SSH_PRIVATE_KEY)    # ← pulled from variable group
+  sshEndpoint: 'kijkeerst-ssh'
 
-stages:
-- stage: Build
-  jobs:
-  - job: LaravelBuild
-    displayName: 'Build Laravel App'
-    steps:
-    - task: UseNode@1
-      inputs:
-        version: '14.x'
-    
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y php php-mbstring php-xml php-zip unzip curl rsync openssh-client
-      displayName: 'Install PHP & Tools'
-    
-    - script: |
-        curl -sS https://getcomposer.org/installer | php
-        php composer.phar install --no-interaction --prefer-dist
-      displayName: 'Install Composer'
+jobs:
+- job: LaravelDeploy
+  displayName: 'Deploy Laravel to kijkeerst.nl'
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+    displayName: 'Use Node.js 18'
 
-    - script: |
-        npm install
-        npm run build
-      displayName: 'Build Frontend'
+  - script: |
+      php -v
+      composer --version || curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
+      composer install --no-interaction --prefer-dist --optimize-autoloader
+    displayName: 'Install PHP Dependencies with Composer'
 
-- stage: Deploy
-  dependsOn: Build
-  jobs:
-  - job: DeployToServer
-    displayName: 'Deploy to VPS'
-    steps:
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo "Setting up SSH..."
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+  - script: |
+      npm install
+      npm run build
+    displayName: 'Install and Build Frontend (NPM)'
 
-          echo "Deploying to $SSH_HOST..."
-          rsync -avz --exclude='.git' --exclude='node_modules' ./ $SSH_USER@$SSH_HOST:/var/www/html/kijkeerst.nl
+  - script: |
+      php artisan migrate --force
+      php artisan storage:link
+    displayName: 'Run Laravel Commands'
 
-          ssh $SSH_USER@$SSH_HOST "cd /var/www/html/kijkeerst.nl && php artisan migrate --force && php artisan storage:link"
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: $(sshEndpoint)
+      sourceFolder: '$(System.DefaultWorkingDirectory)'
+      contents: '**/*'
+      targetFolder: '/var/www/kijkeerst.nl'
+      cleanTargetFolder: false
+      overwrite: true
+    displayName: 'Deploy Code to VPS'
