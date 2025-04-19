@@ -1,0 +1,244 @@
+[33mcommit 4a2827bde8f64635a3d1737174e55ce59a2fa396[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Tue Mar 18 20:21:08 2025 +0100
+
+    11
+
+[33mcommit 57253ea14a4c9c182143f7bf34e20a5343484302[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Tue Mar 18 20:14:38 2025 +0100
+
+    ss
+
+[33mcommit 3404276a7a736a95552e385571e76fe14135329a[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Tue Mar 18 20:12:46 2025 +0100
+
+    test
+
+[33mcommit 96fc0d034d803e87f25b90b78ee98bce9fca54b4[m[33m ([m[1;31mazure/main[m[33m)[m
+Merge: b6039d9 b05c5f6
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Tue Mar 18 20:11:02 2025 +0100
+
+    Merge remote-tracking branch 'azure/main'
+
+[33mcommit b05c5f6f5d8d8cfd9d9c2404d818dcaaa631c6ae[m
+Author: Nawaf Alkhalaf <97100725@st.deltion.nl>
+Date:   Tue Mar 18 19:10:08 2025 +0000
+
+    Deleted README.md
+
+[33mcommit b6039d942f798a226aecab6001b82ef815519d08[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Wed Aug 21 18:47:11 2024 +0200
+
+    website setup for Taxi bedrijve Watan
+
+[33mcommit 81f76eaa9066d73853304749e7b260247ad19a40[m
+Author: Nawaf Alkhalaf <97100725@st.deltion.nl>
+Date:   Tue Mar 18 18:58:35 2025 +0000
+
+    Added README.md
+
+[33mcommit e7b91475b3e8575e4d6d9959ae2de5e6d6a5767d[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Tue Mar 18 20:02:15 2025 +0100
+
+    test
+
+[33mcommit e7621487064b33fc6fffa0d830d10010d70799b8[m
+Author: Nawaf Alkhalaf <97100725@st.deltion.nl>
+Date:   Tue Mar 18 18:58:35 2025 +0000
+
+    Added README.md
+
+[33mcommit 1952849330ff2ace2a2f39a9af36bcdd0132207a[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sun Sep 29 19:23:04 2024 +0200
+
+    paginateing pages
+
+[33mcommit 9affd0113e7aeb827c0b9797de2c942e1244341e[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sun Sep 29 18:26:10 2024 +0200
+
+    services text postion my creadit under the footer and some style fixes in create page
+
+[33mcommit 8f802e350b1327772e216d707fe386de41657f7b[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Sep 28 19:26:52 2024 +0200
+
+    seeder changed. admin btn shows only when admin logged in footer have the avalable delviry and pickup citys.
+
+[33mcommit 840108f31d7c2865105d8a94215aaa35b112a721[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Sep 28 17:57:47 2024 +0200
+
+    added a delte btn for indevual images
+
+[33mcommit e26e66212d439b9464e423a2b2ec2b4e04130470[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Sep 28 17:06:57 2024 +0200
+
+    added doors and passenger to the create page/method in controller
+
+[33mcommit d4fe8b25c86c23c34869e56c73c4d9fb53d298f1[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Sep 28 16:53:45 2024 +0200
+
+    created migration for doors and passengers. small text sizes changes for mobile and pc on taxi/private list pages
+
+[33mcommit ae7ce91745e156c24a6a881eb02ab716b826b431[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Sep 28 16:32:17 2024 +0200
+
+    serviecses
+
+[33mcommit d4fe60990f424459fcc97afe33e43744a3c3a2f7[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Thu Sep 12 01:49:44 2024 +0200
+
+    clean up
+
+[33mcommit 210a9348360a333aef7b70dfdf2656c1bdf78dac[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Sep 9 14:33:47 2024 +0200
+
+    taxi has now also a link to the show page in every listed li(item)
+
+[33mcommit 78d627cf2d6ee094c27a1f4ea1c46c55a6ec2fd4[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Thu Sep 5 08:51:59 2024 +0200
+
+    structure
+
+[33mcommit c0fb16fa54bc738aa155d3b94ca7c58310141cb5[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Thu Sep 5 08:46:34 2024 +0200
+
+    gg
+
+[33mcommit ee335ce673692341cad3f5c9702d261cf9895dc3[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Aug 31 19:14:08 2024 +0200
+
+    license of the used icons
+
+[33mcommit cba2461316707fa7ff1fe84c37304b2e4a06cbd5[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Aug 31 19:07:56 2024 +0200
+
+    loading screen
+
+[33mcommit 64c97afc9a01fe92e58767e770d9253a332eec48[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Fri Aug 30 23:19:19 2024 +0200
+
+    nave bar style
+
+[33mcommit 87d8aa9f5786257f08fc879e8ae8d4345fd1aa63[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Fri Aug 30 23:07:16 2024 +0200
+
+    login/register style
+
+[33mcommit 628f44c29dae528cd7f5c0e72f22a95827fc7bdc[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Fri Aug 30 22:20:11 2024 +0200
+
+    routing admin is now authintactions
+
+[33mcommit 0de8f820b644fb7d24b2f2f31e0b538eb379dbe7[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Fri Aug 30 21:25:18 2024 +0200
+
+    show page complete
+
+[33mcommit 4e84067fcfc133d36d73c65c391392d6e17fd4b3[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Wed Aug 28 23:48:36 2024 +0200
+
+    private en taxi links in de home page
+
+[33mcommit e87da5897e829e56d1860f82996ad3ab9e0f6672[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Wed Aug 28 22:43:49 2024 +0200
+
+    list images have marged in shadow with the card
+
+[33mcommit d36765e8574118894ff2015422382372a403a672[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Wed Aug 28 22:37:14 2024 +0200
+
+    list and admin and home page links to taxi and private
+
+[33mcommit 46a92898b27130430fd5ae3b9fb8daef86384b84[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 22:31:10 2024 +0200
+
+    delte functions / + the images derectory gets deleted when the car is delted
+
+[33mcommit 7b26c43c5c31a68cf899337c3b9ce3bd2999cd8f[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 18:51:12 2024 +0200
+
+    private and taxi view
+
+[33mcommit a759f18f2e2e3b4841e165a9ca1a6e95bdae6eea[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 18:42:49 2024 +0200
+
+    search style and price display
+
+[33mcommit 076604176210a7394d815a4818f74cd8964b400a[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 18:01:29 2024 +0200
+
+    list and the search bar
+
+[33mcommit f65e6d6180ae4b4fded6b68f0f832362529b4ec2[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 04:19:27 2024 +0200
+
+    edited the list style and the edit form strucure for beter view of the images and inputs
+
+[33mcommit f593b4e157306c99b3eddf40ac4f95e2f3b6a2dc[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 03:58:43 2024 +0200
+
+    edit function and edit page /update class and routing
+
+[33mcommit f518457b042c618eb2bfd9cfd952560e0a355d2f[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 01:14:38 2024 +0200
+
+    the create and list blade and the routing / store method
+
+[33mcommit 31c8240552f5537ab2f6a85200960566262d185e[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 01:13:31 2024 +0200
+
+    alterd the table to have seprated images fields
+
+[33mcommit f3d3c36f6336ba69edb6e82a69b71f334d4077d7[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Mon Aug 26 01:13:10 2024 +0200
+
+    the list includes cars from the db now
+
+[33mcommit b8d3f1e176bb3fee3e36fbc2a724b4f292708a33[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Aug 24 17:12:35 2024 +0200
+
+    the create page /form /routing
+
+[33mcommit c09742ea75497b01df0ca1ccaa30c9e1f800159c[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Sat Aug 24 15:48:14 2024 +0200
+
+    admin cars list
+
+[33mcommit 8f2eea86ff6e2f14dbc3cd8040d8e7ca8452bff5[m
+Author: Nawaf1w3 <57842047+Nawaf1w3@users.noreply.github.com>
+Date:   Fri Aug 2
