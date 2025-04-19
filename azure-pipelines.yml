@@ -8,11 +8,14 @@ pool:
 
 variables:
   sshEndpoint: 'kijkeerst-ssh'
+  deployPath: '/var/www/kijkeerst'
+  rsyncFilterFile: 'rsync-filter.txt'
 
 jobs:
 - job: LaravelDeploy
-  displayName: 'Deploy Laravel to kijkeerst.nl'
+  displayName: 'Deploy Laravel to kijkeerst VPS'
   steps:
+
   - task: UseNode@1
     inputs:
       version: '18.x'
@@ -25,21 +28,44 @@ jobs:
     displayName: 'Install PHP Dependencies with Composer'
 
   - script: |
-      npm install
+      npm ci
       npm run build
-    displayName: 'Install and Build Frontend (NPM)'
+    displayName: 'Install and Build Frontend'
 
   - script: |
       php artisan migrate --force
       php artisan storage:link
-    displayName: 'Run Laravel Commands'
+    displayName: 'Run Laravel Artisan Commands'
+
+  # Create rsync filter file for exclusion
+  - script: |
+      echo "- .git/" > $(rsyncFilterFile)
+      echo "- node_modules/" >> $(rsyncFilterFile)
+      echo "- storage/logs/" >> $(rsyncFilterFile)
+      echo "- .env" >> $(rsyncFilterFile)
+    displayName: 'Create rsync filter file'
 
   - task: CopyFilesOverSSH@0
     inputs:
       sshEndpoint: $(sshEndpoint)
       sourceFolder: '$(System.DefaultWorkingDirectory)'
       contents: '**/*'
-      targetFolder: '/var/www/kijkeerst.nl'
+      targetFolder: $(deployPath)
       cleanTargetFolder: false
       overwrite: true
-    displayName: 'Deploy Code to VPS'
+    displayName: '[TEMP] Fallback File Sync - consider using rsync for delta updates'
+
+  # Optionally: Use rsync via SSH for delta deployment (recommended)
+  - script: |
+      rsync -avz --delete --filter='merge $(rsyncFilterFile)' ./ $(sshEndpointUser)@$(sshEndpointHost):$(deployPath)
+    condition: false # Set to `true` once SSH key auth + host known
+    displayName: '[OPTIONAL] Rsync incremental deploy'
+
+  # Set correct ownership (if needed)
+  - task: SSH@0
+    inputs:
+      sshEndpoint: $(sshEndpoint)
+      runOptions: 'inline'
+      inline: |
+        sudo chown -R www-data:www-data $(deployPath)
+    displayName: 'Fix ownership to www-data'
