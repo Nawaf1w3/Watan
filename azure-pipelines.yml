@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UseNode@2
+  inputs:
+    versionSpec: '14.x'
+    addToPath: true
+
+# Checkout the repository
+- task: Checkout@1
+
+# Set up PHP
+- task: UsePhp@1
+  inputs:
+    version: '7.4'  # Specify your PHP version
+
+# Install Composer dependencies
+- script: |
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar install --no-interaction --prefer-dist
+  displayName: 'Install Composer Dependencies'
+
+# Install npm dependencies and run build
+- script: |
+    npm install
+    npm run build
+  displayName: 'Install and Build npm dependencies'
+
+# Run Laravel migrations
+- script: |
+    php artisan migrate --force
+  displayName: 'Run Laravel Migrations'
+
+# Create the storage link
+- script: |
+    php artisan storage:link
+  displayName: 'Create Storage Link'
