@@ -1,39 +1,58 @@
 trigger:
-  - main
+  branches:
+    include:
+      - main
 
 pool:
-  name: 'Nawaf'  # Use your custom agent pool
+  name: 'Nawaf'
 
-jobs:
-- job: InstallDependencies
-  displayName: 'Install Dependencies'
-  steps:
-  - script: |
-      curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-      sudo apt-get install -y nodejs php7.4 php7.4-cli php7.4-fpm php7.4-mbstring php7.4-xml php7.4-zip
-    displayName: 'Install Node.js, PHP 7.4'
+variables:
+  SSH_USER: azureuser            # ← your SSH username on the VPS
+  SSH_HOST: kijkeerst.nl         # ← your VPS domain or IP
+  SSH_KEY: $(SSH_PRIVATE_KEY)    # ← pulled from variable group
 
-- job: InstallComposer
-  displayName: 'Install Composer Dependencies'
-  dependsOn: InstallDependencies
-  steps:
-  - script: |
-      curl -sS https://getcomposer.org/installer | php
-      php composer.phar install --no-interaction --prefer-dist
-    displayName: 'Install Composer Dependencies'
+stages:
+- stage: Build
+  jobs:
+  - job: LaravelBuild
+    displayName: 'Build Laravel App'
+    steps:
+    - task: UseNode@1
+      inputs:
+        version: '14.x'
+    
+    - script: |
+        sudo apt-get update
+        sudo apt-get install -y php php-mbstring php-xml php-zip unzip curl rsync openssh-client
+      displayName: 'Install PHP & Tools'
+    
+    - script: |
+        curl -sS https://getcomposer.org/installer | php
+        php composer.phar install --no-interaction --prefer-dist
+      displayName: 'Install Composer'
 
-- job: RunMigrations
-  displayName: 'Run Laravel Migrations'
-  dependsOn: InstallComposer
-  steps:
-  - script: |
-      php artisan migrate --force
-    displayName: 'Run Laravel Migrations'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Build Frontend'
 
-- job: CreateStorageLink
-  displayName: 'Create Storage Link'
-  dependsOn: RunMigrations
-  steps:
-  - script: |
-      php artisan storage:link
-    displayName: 'Create Storage Link'
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: DeployToServer
+    displayName: 'Deploy to VPS'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "Setting up SSH..."
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+
+          echo "Deploying to $SSH_HOST..."
+          rsync -avz --exclude='.git' --exclude='node_modules' ./ $SSH_USER@$SSH_HOST:/var/www/html/kijkeerst.nl
+
+          ssh $SSH_USER@$SSH_HOST "cd /var/www/html/kijkeerst.nl && php artisan migrate --force && php artisan storage:link"
