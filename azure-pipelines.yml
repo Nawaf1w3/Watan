@@ -8,7 +8,7 @@ jobs:
 - job: InstallNode
   displayName: 'Install Node.js'
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -19,7 +19,7 @@ jobs:
   displayName: 'Install PHP 7.4'
   dependsOn: InstallNode
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       sudo apt-get install -y php7.4 php7.4-cli php7.4-fpm php7.4-mbstring php7.4-xml php7.4-zip
@@ -29,7 +29,7 @@ jobs:
   displayName: 'Install Composer Dependencies'
   dependsOn: InstallPHP
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       curl -sS https://getcomposer.org/installer | php
@@ -40,7 +40,7 @@ jobs:
   displayName: 'Install and Build npm dependencies'
   dependsOn: InstallComposer
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       npm install
@@ -51,7 +51,7 @@ jobs:
   displayName: 'Run Laravel Migrations'
   dependsOn: InstallNPM
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       php artisan migrate --force
@@ -61,7 +61,7 @@ jobs:
   displayName: 'Create Storage Link'
   dependsOn: RunMigrations
   pool:
-    name: 'Azure Pipelines'
+    name: 'Nawaf'
   steps:
   - script: |
       php artisan storage:link
