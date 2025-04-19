@@ -7,48 +7,53 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  sshSecret: '$(ssh_secret)'  # Reference to the variable group
+  sshSecret: '$(ssh_secret)'  # Reference to the variable group storing the SSH private key
 
 jobs:
 - job: LaravelDeploy
   displayName: 'Deploy Laravel to kijkeerst.nl'
   steps:
-  
+
+  # Use Node.js version 18.x
   - task: UseNode@1
     inputs:
       version: '18.x'
     displayName: 'Use Node.js 18'
 
+  # Install PHP dependencies with Composer
   - script: |
       php -v
       composer --version || curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
       composer install --no-interaction --prefer-dist --optimize-autoloader
     displayName: 'Install PHP Dependencies with Composer'
 
+  # Install and build frontend with NPM
   - script: |
       npm install
       npm run build
     displayName: 'Install and Build Frontend (NPM)'
 
+  # Run Laravel commands like migrations and storage link
   - script: |
       php artisan migrate --force
       php artisan storage:link
     displayName: 'Run Laravel Commands'
 
+  # Deploy the project using rsync over SSH
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
         echo "Deploying using rsync..."
         
-        # Create SSH directory
+        # Create SSH directory and add private key
         mkdir -p ~/.ssh
-        echo "$(SSH_PRIVATE_KEY)" > ~/.ssh/id_rsa
+        echo "$(sshSecret)" > ~/.ssh/id_rsa
         
         # Set permissions for the SSH key
         chmod 600 ~/.ssh/id_rsa
         
-        # Create an rsync filter file
+        # Create an rsync filter file to exclude unnecessary files
         echo "- /.phpunit.cache" > $(Build.ArtifactStagingDirectory)/rsync-filter.txt
         echo "- /node_modules" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
         echo "- /public/build" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
@@ -68,6 +73,6 @@ jobs:
         echo "- /.idea" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
         echo "- /.vscode" >> $(Build.ArtifactStagingDirectory)/rsync-filter.txt
         
-        # Deploy using rsync with the SSH key
-        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@123.45.67.89:/var/www/kijkeerst.nl
+        # Deploy the project using rsync with SSH
+        rsync -az --filter="merge $(Build.ArtifactStagingDirectory)/rsync-filter.txt" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@45.9.191.34:/var/www/kijkeerst.nl
     displayName: 'Deploy with rsync'
