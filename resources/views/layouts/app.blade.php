@@ -17,17 +17,6 @@
         }
 </style>
 <head>
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
-    {{-- hi --}}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -85,7 +74,7 @@
                                             c0-8.832-7.168-16-16-16H128c-8.832,0-16,7.168-16,16c0,149.984,122.016,272,272,272c8.832,0,16-7.168,16-16v-59.072
                                             C400,316.096,392.832,308.928,384,308.928z" class="fill-white" />
                                         </svg>
-                                        TN 06-24136771
+                                        TN 06-241367711111111111
                                     </a>
                                 </li>
                                 <li class="mb-4">
