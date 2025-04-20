@@ -7,16 +7,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  - name: deployPath
-    value: '/var/www/kijkeerst'
-  - name: rsyncFilterFile
-    value: '$(Build.ArtifactStagingDirectory)/rsync-filter.txt'
+  deployPath: '/var/www/kijkeerst'
+  rsyncFilterFile: '$(Build.ArtifactStagingDirectory)/rsync-filter.txt'
 
 jobs:
 - job: LaravelDeploy
   displayName: 'Deploy Laravel to kijkeerst VPS'
-  steps:
 
+  steps:
   - task: UseNode@1
     inputs:
       version: '18.x'
@@ -42,18 +40,40 @@ jobs:
     name: RsyncDeploy
     displayName: 'Optimized Rsync Deployment'
     env:
-      SSH_PRIVATE_KEY: $(SSH_PRIVATE_KEY)
+      SSH_PRIVATE_KEY: |
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+        NhAAAAAwEAAQAAAQEA2Jt28K99lN0nLjqUcnCNgUG82DZpm4eDdGWyVeQe4EjbGpHrYArq
+        MncAJDQ/kAkMdxTAGhyBTTaIf+XwNCopAK2qX7WMjnGmmrrXUf5368D+d5j8SzH8HiK1g5
+        BDiHPkO6CoJepiToOi3ELGBVWa2AdDcj0qe/929yirZ6r7PPankvapILh0u5EhbPqDiH9c
+        5/yxZg0FpCivxVBqDCiNjyPrFlBivaFO4SfI3v9YhCh1/+E7DSNVIR9+Fk3zWtMA2Mj1jP
+        1uY1XQTBzk8QGWVmpsNHML4gEYNPQHJ562NqwVe8FyVsY5ODmcOaaSUbyuvl5KiTxNGGFu
+        xS1oq0Fq2wAAA9CRW0SUkVtElAAAAAdzc2gtcnNhAAABAQDYm3bwr32U3ScuOpRycI2BQb
+        zYNmmbh4N0ZbJV5B7gSNsaketgCuoydwAkND+QCQx3FMAaHIFNNoh/5fA0KikArapftYyO
+        caaautdR/nfrwP53mPxLMfweIrWDkEOIc+Q7oKgl6mJOg6LcQsYFVZrYB0NyPSp7/3b3KK
+        tnqvs89qeS9qkguHS7kSFs+oOIf1zn/LFmDQWkKK/FUGoMKI2PI+sWUGK9oU7hJ8je/1iE
+        KHX/4TsNI1UhH34WTfNa0wDYyPWM/W5jVdBMHOTxAZZWamw0cwviARg09AcnnrY2rBV7wX
+        JWxjk4OZw5ppJRvK6+XkqJPE0YYW7FLWirQWrbAAAAAwEAAQAAAQEAg6BNccsipCCT25rL
+        dJOC2eYprLW8DUAXGNdnvJwIS0DarFW5074uPQZldpqteYiWI5Lffb6OsG4QGrCO/BQWoI
+        vn+YsoY7Mai/I4QGJDW2cG+4Ri5Ar26xUqek1jTHsoWTeyln/Mx2tkvzZwgPNZSid3y+bx
+        dzJxh5YWOsQDMjKOrBeDwE6xwfYUI+eOqW9XTWtwCaR25yjl9BMdUh3G/mC4+rpiIX2jE3
+        IwNC+9GZWR6YiTGtAH2oejejKPFKftkQSy5B5PJo18jg3Jsx3IfUW1cms+hBmDdj5ARp1e
+        8Oci6fYYaG982+t9Gk7PrYT+EJ3rpsWvUaSP/86osM4w4QAAAIBv2y9fhjqtOzHSXBCSkq
+        o0ULmdepnD46vEn9VcmUELWVhA/RbDZmQ+/FdhWLc4L1oIO8CF+i4S9z6rozXKI8Ewk3T1
+        /LOzmASCiaW+fXuswgdzbT8mAeEFEsBSlldUQtdMbIBI50icQxTzsh03B34sDcIA9YEQhu
+        lh9qG4MRm3oQAAAIEA8d9uz5fnwnaWLFW47vMIT9CcZjMDG2KeNn9wQnYdK89KUnqQbjbv
+        zGlGHRJmzaHpqXHJ3ozr1lt++4ez98NCy7ZpEoU0yOVim2A7xqjIZcI613AqCJMCLno4xo
+        XNzHxANGsnnWbVpmqfc5wwRxbS+McCrwlcApNyrQhDH8slWLEAAACBAOVCQMmwtI26UFq2
+        kPhzgv1m3I8tHyMgxy4g3K5PyNFiuJ4YWaiwHiKFhtgN7oKo/fzNynN/iNa8u9X9G2ySRD
+        gi9TMqIMFIGp3qNlgLvPMUpOpbO30TBWvMMSxNAXRhjVa2M8A1p0WMHd1EFF/WKSB9OuL0
+        3aYHJdxn5iXvgx9LAAAAFW5uYXVhQERFU0tUT1AtTEVBVEFPMgECAwQF
+        -----END OPENSSH PRIVATE KEY-----
+
     inputs:
       targetType: 'inline'
       script: |
         echo "Setting up optimized rsync deployment..."
 
-        if [[ -z "$SSH_PRIVATE_KEY" ]]; then
-          echo "Error: SSH key not found in environment."
-          exit 1
-        fi
-
-        # Setup SSH
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -65,8 +85,8 @@ jobs:
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@45.9.191.34 "echo 'SSH connection successful'"
 
         echo "Creating rsync filter file..."
-        mkdir -p $(dirname $(rsyncFilterFile))
-        cat > $(rsyncFilterFile) << 'EOF'
+        mkdir -p "$(dirname "$rsyncFilterFile")"
+        cat > "$rsyncFilterFile" << 'EOF'
         - .git/
         - .gitignore
         - .gitattributes
@@ -94,14 +114,14 @@ jobs:
         EOF
 
         echo "Rsync filter file contents:"
-        cat $(rsyncFilterFile)
+        cat "$rsyncFilterFile"
 
         echo "Starting optimized rsync deployment..."
-        rsync -avz --stats --delete --filter="merge $(rsyncFilterFile)" \
+        rsync -avz --stats --delete --filter="merge $rsyncFilterFile" \
           -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
-          ./ root@45.9.191.34:$(deployPath)
+          ./ root@45.9.191.34:$deployPath
 
         echo "Setting correct permissions..."
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@45.9.191.34 "chown -R www-data:www-data $(deployPath)"
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@45.9.191.34 "chown -R www-data:www-data $deployPath"
 
         echo "Deployment completed successfully!"
