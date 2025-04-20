@@ -7,7 +7,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  - group: SSH_Secrets  # Reference to the variable group containing SSH_PRIVATE_KEY
   - name: deployPath
     value: '/var/www/kijkeerst'
   - name: rsyncFilterFile
@@ -40,58 +39,46 @@ jobs:
     displayName: 'Run Laravel Artisan Commands'
 
   - task: Bash@3
+    name: RsyncDeploy
+    displayName: 'Optimized Rsync Deployment'
+    env:
+      SSH_PRIVATE_KEY: $(SSH_PRIVATE_KEY)
     inputs:
       targetType: 'inline'
       script: |
         echo "Setting up optimized rsync deployment..."
-        
-        # Ensure the SSH key variable is correctly accessed
+
         if [[ -z "$SSH_PRIVATE_KEY" ]]; then
-          echo "Error: SSH key not found."
+          echo "Error: SSH key not found in environment."
           exit 1
         fi
 
-        # Create SSH directory
+        # Setup SSH
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
-        
-        # Write SSH key to the correct file
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        
-        # Add server to known hosts
         ssh-keyscan -H 45.9.191.34 >> ~/.ssh/known_hosts
         chmod 600 ~/.ssh/known_hosts
-        
-        # Test SSH connection
+
         echo "Testing SSH connection..."
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@45.9.191.34 "echo 'SSH connection successful'"
-        
-        # Create an optimized rsync filter file
+
         echo "Creating rsync filter file..."
         mkdir -p $(dirname $(rsyncFilterFile))
         cat > $(rsyncFilterFile) << 'EOF'
-        # Exclude version control
         - .git/
         - .gitignore
         - .gitattributes
-        
-        # Exclude dependency directories (will be rebuilt on server if needed)
         - /node_modules/
         - /vendor/
-        
-        # Exclude environment and local config
         - /.env
         - /.env.*
-        
-        # Exclude caches and logs
         - /bootstrap/cache/
         - /storage/logs/
         - /storage/framework/cache/
         - /storage/framework/sessions/
         - /storage/framework/views/
-        
-        # Exclude other unnecessary files
         - /.phpunit.cache/
         - /public/hot
         - /public/storage
@@ -105,20 +92,16 @@ jobs:
         - /.phpunit.result.cache
         - /.phpactor.json
         EOF
-        
-        # Display filter file for debugging
+
         echo "Rsync filter file contents:"
         cat $(rsyncFilterFile)
-        
-        # Deploy using rsync with delta transfer
+
         echo "Starting optimized rsync deployment..."
         rsync -avz --stats --delete --filter="merge $(rsyncFilterFile)" \
           -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
           ./ root@45.9.191.34:$(deployPath)
-        
-        # Set correct permissions on the server
+
         echo "Setting correct permissions..."
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@45.9.191.34 "chown -R www-data:www-data $(deployPath)"
-        
+
         echo "Deployment completed successfully!"
-    displayName: 'Optimized Rsync Deployment'
